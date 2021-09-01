@@ -36,6 +36,26 @@ los mismos.
 """
 
 # Construccion de modelos
+def newCatalog():
+    """
+    Inicializa el catálogo de libros. Crea una lista vacia para guardar
+    todos los libros, adicionalmente, crea una lista vacia para los autores,
+    una lista vacia para los generos y una lista vacia para la asociación
+    generos y libros. Retorna el catalogo inicializado.
+    """
+    catalog = {'artists': None,
+               'artworks': None}
+
+    catalog['artists'] = lt.newList()
+    catalog['artworks'] = lt.newList()
+    return catalog
+
+def addArtwork(catalog, artwork):
+    # Se adiciona el libro a la lista de libros
+    lt.addLast(catalog['artworks'], artwork)
+
+def addArtist(catalog, artist):
+    lt.addLast(catalog['artists'], artist)
 
 # Funciones para agregar informacion al catalogo
 
