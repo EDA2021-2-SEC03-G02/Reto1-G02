@@ -61,6 +61,10 @@ def getLast3Artists(catalog):
     sublista = model.getLast3Artists(catalog)
     return sublista
 
+def getLast3Artworks(catalog):
+    sublista = model.lastThreeArtworks(catalog)
+    return sublista
+
 
 # Funciones para la carga de datos
 

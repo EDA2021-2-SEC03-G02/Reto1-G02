@@ -59,12 +59,14 @@ def addArtist(catalog, artist):
 
 def getLast3Artists(catalog):
     artists = catalog['artists']
-    sublista1 = lt.subList(artists, 1, 3)
-    return artists
+    sublista = lt.subList(artists, lt.size(artists)-2, 3)
+    return sublista
 
 
 def lastThreeArtworks(catalog):
-    pass
+    artworks = catalog['artworks']
+    sublista = lt.subList(artworks, lt.size(artworks)-2, 3)
+    return sublista
 
 # Funciones para agregar informacion al catalogo
 

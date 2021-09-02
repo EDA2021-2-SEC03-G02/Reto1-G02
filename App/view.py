@@ -58,6 +58,9 @@ def loadData(catalog):
 def Last3Artists(catalog):
     controller.getLast3Artists(catalog)
 
+def Last3Artworks(catalog):
+    controller.getLast3Artworks(catalog)
+
 catalog = None
 """
 Menu principal
@@ -69,10 +72,12 @@ while True:
         print("Cargando información de los archivos ....")
         catalog = initCatalog()
         loadData(catalog)
-        print(catalog["artists"])
         print('Artistas cargados: ' + str(lt.size(catalog['artists'])))
         print('Obras cargadas: ' + str(lt.size(catalog['artworks'])))
+        print("Los últimos 3 artistas son: ")
         print(Last3Artists(catalog))
+        print("Las últimas 3 obras son: ")
+        print(Last3Artworks(catalog))
 
     elif int(inputs[0]) == 2:
         pass
