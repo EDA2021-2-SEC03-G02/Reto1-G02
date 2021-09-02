@@ -57,6 +57,13 @@ def addArtwork(catalog, artwork):
 def addArtist(catalog, artist):
     lt.addLast(catalog['artists'], artist)
 
+def lastThreeArtist(catalog):
+    pass
+
+
+def lastThreeArtworks(catalog):
+    pass
+
 # Funciones para agregar informacion al catalogo
 
 # Funciones para creacion de datos
