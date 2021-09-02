@@ -57,8 +57,10 @@ def addArtwork(catalog, artwork):
 def addArtist(catalog, artist):
     lt.addLast(catalog['artists'], artist)
 
-def lastThreeArtist(catalog):
-    pass
+def getLast3Artists(catalog):
+    artists = catalog['artists']
+    sublista = lt.subList(artists, -3, 3)
+    return sublista
 
 
 def lastThreeArtworks(catalog):

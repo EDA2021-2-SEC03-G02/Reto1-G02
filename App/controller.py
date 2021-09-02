@@ -57,6 +57,10 @@ def loadArtists(catalog):
     for artist in input_file:
         model.addArtist(catalog, artist)
 
+def getLast3Artists(catalog):
+    sublista = model.getLast3Artists(catalog)
+    return sublista
+
 
 # Funciones para la carga de datos
 
