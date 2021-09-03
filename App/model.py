@@ -46,8 +46,8 @@ def newCatalog():
     catalog = {'artists': None,
                'artworks': None}
 
-    catalog['artists'] = lt.newList()
-    catalog['artworks'] = lt.newList()
+    catalog['artists'] = lt.newList(cmpfunction=compareartist)
+    catalog['artworks'] = lt.newList(cmpfunction=compareartworks)
     return catalog
 
 def addArtwork(catalog, artwork):
@@ -76,4 +76,19 @@ def lastThreeArtworks(catalog):
 
 # Funciones utilizadas para comparar elementos dentro de una lista
 
+def compareartist(artistname1, artist):
+    if artistname1 > artist['ConstituentID']:
+        return 1
+    elif artistname1 == artist['ConstituentID']:
+        return 0
+    else:
+        return -1
+
+def compareartworks(artworkname1,artwork):
+    if artworkname1 > artwork['ObjectID']:
+        return 1
+    elif artworkname1 == artwork['ObjectID']:
+        return 0
+    else:
+        return -1
 # Funciones de ordenamiento
