@@ -23,7 +23,11 @@
 import config as cf
 import model
 import csv
-
+import copy
+import config as cf
+from DISClib.ADT import list as lt
+from DISClib.Algorithms.Sorting import shellsort as sa
+assert cf
 
 """
 El controlador se encarga de mediar entre la vista y el modelo.
@@ -59,10 +63,13 @@ def loadArtists(catalog):
 
 def getLast3Artists(catalog):
     sublista = model.getLast3Artists(catalog)
+    print (lt.size(sublista))
     return sublista
+    
 
 def getLast3Artworks(catalog):
     sublista = model.lastThreeArtworks(catalog)
+    print (lt.size(sublista))
     return sublista
 
 

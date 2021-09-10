@@ -59,13 +59,15 @@ def addArtist(catalog, artist):
 
 def getLast3Artists(catalog):
     artists = catalog['artists']
-    sublista = lt.subList(artists, lt.size(artists)-2, 3)
+    sublista = lt.subList(artists, 1, 3)
+    print(lt.size(sublista))
     return sublista
 
 
 def lastThreeArtworks(catalog):
     artworks = catalog['artworks']
-    sublista = lt.subList(artworks, lt.size(artworks)-2, 3)
+    sublista = lt.subList(artworks, 1, 3)
+    print(lt.size(sublista))
     return sublista
 
 # Funciones para agregar informacion al catalogo
@@ -77,17 +79,17 @@ def lastThreeArtworks(catalog):
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 def compareartist(artistname1, artist):
-    if artistname1 > artist['ConstituentID']:
+    if artistname1['ConstituentID'] > artist['ConstituentID']:
         return 1
-    elif artistname1 == artist['ConstituentID']:
+    elif artistname1['ConstituentID'] == artist['ConstituentID']:
         return 0
     else:
         return -1
 
 def compareartworks(artworkname1,artwork):
-    if artworkname1 > artwork['ObjectID']:
+    if artworkname1['ObjectID'] > artwork['ObjectID']:
         return 1
-    elif artworkname1 == artwork['ObjectID']:
+    elif artworkname1['ObjectID'] == artwork['ObjectID']:
         return 0
     else:
         return -1
