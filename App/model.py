@@ -46,8 +46,15 @@ def newCatalog():
     catalog = {'artists': None,
                'artworks': None}
 
-    catalog['artists'] = lt.newList(cmpfunction=compareartist)
-    catalog['artworks'] = lt.newList(cmpfunction=compareartworks)
+    TipoDeLista= input('¿Cómo desea guardar el catálogo del museo?(ll = Linked_list, al = Array_List))  ')
+    if TipoDeLista == 'll':
+        catalog['artists'] = lt.newList('SINGLE_LINKED', cmpfunction=compareartist)
+        catalog['artworks'] = lt.newList('SINGLE_LINKED', cmpfunction=compareartworks)
+    if TipoDeLista == 'al':
+        catalog['artists'] = lt.newList('ARRAY_LIST', cmpfunction=compareartist)
+        catalog['artworks'] = lt.newList('ARRAY_LIST', cmpfunction=compareartworks)
+    else:
+        return 'Error'
     return catalog
 
 def addArtwork(catalog, artwork):
@@ -59,14 +66,14 @@ def addArtist(catalog, artist):
 
 def getLast3Artists(catalog):
     artists = catalog['artists']
-    sublista = lt.subList(artists, (len(artists))-3, (len(artists))-1)
+    sublista = lt.subList(artists, (len(artists))-3, 3)
     print(lt.size(sublista))
     return sublista
 
 
 def lastThreeArtworks(catalog):
     artworks = catalog['artworks']
-    sublista = lt.subList(artworks, (len(artworks))-3, (len(artworks))-1)
+    sublista = lt.subList(artworks, (len(artworks))-3, 3)
     print(lt.size(sublista))
     return sublista
 
