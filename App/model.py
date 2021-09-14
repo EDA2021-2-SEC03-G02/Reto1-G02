@@ -24,7 +24,7 @@
  * Dario Correal - Version inicial
  """
 
-
+import datetime
 import config as cf
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
@@ -84,6 +84,33 @@ def lastThreeArtworks(catalog):
 # Funciones de consulta
 
 # Funciones utilizadas para comparar elementos dentro de una lista
+def cmpArtworkByDateAcquired(artwork1, artwork2):
+    """
+    Devuelve verdadero (True) si el 'DateAcquired' de artwork1 es menores que el de artwork2
+    :
+    artwork1: informacion de la primera obra que incluye su valor 'DateAcquired'
+    artwork2: informacion de la segunda obra que incluye su valor 'DateAcquired'
+    """
+
+    strdateArt1= artwork1['DateAcquired']
+    year1=int(strdateArt1[0]+strdateArt1[1]+strdateArt1[2]+strdateArt1[3])
+    month1=int(strdateArt1[5]+strdateArt1[6])
+    day1=int(strdateArt1[8]+strdateArt1[9])
+    dateArt1=datetime.datetime(year1,month1,day1)
+
+    strdateArt2= artwork2['DateAcquired']
+    year2=int(strdateArt2[0]+strdateArt2[1]+strdateArt2[2]+strdateArt2[3])
+    month2=int(strdateArt2[5]+strdateArt2[6])
+    day2=int(strdateArt2[8]+strdateArt2[9])
+    dateArt2=datetime.datetime(year2,month2,day2)
+
+    if dateArt1 < dateArt2:
+        return True
+    else:
+        return False 
+    
+
+
 
 def compareartist(artistname1, artist):
     if artistname1['ConstituentID'] > artist['ConstituentID']:
