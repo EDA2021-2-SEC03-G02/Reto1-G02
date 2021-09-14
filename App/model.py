@@ -59,14 +59,14 @@ def addArtist(catalog, artist):
 
 def getLast3Artists(catalog):
     artists = catalog['artists']
-    sublista = lt.subList(artists, 1, 3)
+    sublista = lt.subList(artists, (len(artists))-3, (len(artists))-1)
     print(lt.size(sublista))
     return sublista
 
 
 def lastThreeArtworks(catalog):
     artworks = catalog['artworks']
-    sublista = lt.subList(artworks, 1, 3)
+    sublista = lt.subList(artworks, (len(artworks))-3, (len(artworks))-1)
     print(lt.size(sublista))
     return sublista
 
