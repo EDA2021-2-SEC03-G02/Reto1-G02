@@ -101,11 +101,14 @@ while True:
     elif int(inputs[0]) == 2:
         pass
     elif int(inputs[0])== 3:
-        size = input("Indique tamaño de la muestra: ")
-        result = controller.sortArtworksDateAcquired(catalog, int(size))
-        print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
+        size = int(input("Indique tamaño de la muestra: "))
+        if size > lt.size(catalog["artworks"]):
+            print("Elija un tamaño válido, menor o igual a la cantidad total de obras")
+        else:
+            result = controller.sortArtworksDateAcquired(catalog, size) 
+            print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
                                           str(result[0]))
-        printSortResultsArtworks(result[1])
+            printSortResultsArtworks(result[1])
     else:
         sys.exit(0)
 sys.exit(0)
