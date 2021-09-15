@@ -71,14 +71,12 @@ def addArtist(catalog, artist):
 def getLast3Artists(catalog):
     artists = catalog['artists']
     sublista = lt.subList(artists, (len(artists))-3, 3)
-    print(lt.size(sublista))
     return sublista
 
 
 def lastThreeArtworks(catalog):
     artworks = catalog['artworks']
     sublista = lt.subList(artworks, (len(artworks))-3, 3)
-    print(lt.size(sublista))
     return sublista
 
 # Funciones para agregar informacion al catalogo
@@ -105,6 +103,8 @@ def cmpArtworkByDateAcquired(artwork1, artwork2):
     dateArt1=datetime.datetime(year1,month1,day1)
 
     strdateArt2= artwork2['DateAcquired']
+    if len(strdateArt2) == 0:
+        return False
     year2=int(strdateArt2[0]+strdateArt2[1]+strdateArt2[2]+strdateArt2[3])
     month2=int(strdateArt2[5]+strdateArt2[6])
     day2=int(strdateArt2[8]+strdateArt2[9])
@@ -148,7 +148,7 @@ def sortArtworksDateAcquired(catalog, size):
         sorted_list = qs.sort(sub_list, cmpArtworkByDateAcquired)
     elif TipoDeOrdenamiento == 'sa':
         sorted_list = sa.sort(sub_list, cmpArtworkByDateAcquired)
-        
+
     stop_time = time.process_time()
     elapsed_time_mseg = (stop_time - start_time)*1000
     return elapsed_time_mseg, sorted_list

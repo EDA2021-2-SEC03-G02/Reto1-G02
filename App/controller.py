@@ -63,13 +63,11 @@ def loadArtists(catalog):
 
 def getLast3Artists(catalog):
     sublista = model.getLast3Artists(catalog)
-    print (lt.size(sublista))
     return sublista
     
 
 def getLast3Artworks(catalog):
     sublista = model.lastThreeArtworks(catalog)
-    print (lt.size(sublista))
     return sublista
 
 
