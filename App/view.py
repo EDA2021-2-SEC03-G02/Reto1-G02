@@ -25,6 +25,7 @@ import sys
 import controller
 from DISClib.ADT import list as lt
 assert cf
+import sys
 
 
 """
@@ -33,6 +34,8 @@ Presenta el menu de opciones y por cada seleccion
 se hace la solicitud al controlador para ejecutar la
 operación solicitada
 """
+default_limit = 1000
+sys.setrecursionlimit(default_limit*10)
 
 def printMenu():
     print("Bienvenido")
@@ -61,6 +64,18 @@ def Last3Artists(catalog):
 def Last3Artworks(catalog):
     return controller.getLast3Artworks(catalog)
 
+
+def printSortResultsArtworks(ord_artworks, sample=10):
+    size = lt.size(ord_artworks)
+    if size>sample:
+        print("Las primeras", sample, "obras ordenadas son:")
+        i = 1
+        while i <= sample:
+            artwork = lt.getElement(ord_artworks,i)
+            print("Identificador único de la obra: " + artwork["ObjectID"] + " Día de adquisición: " + artwork["DateAcquired"] )
+            i += 1
+    pass
+
 catalog = None
 a=None
 """
@@ -85,7 +100,12 @@ while True:
         print(a1)
     elif int(inputs[0]) == 2:
         pass
-
+    elif int(inputs[0])== 3:
+        size = input("Indique tamaño de la muestra: ")
+        result = controller.sortArtworksDateAcquired(catalog, int(size))
+        print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
+                                          str(result[0]))
+        printSortResultsArtworks(result[1])
     else:
         sys.exit(0)
 sys.exit(0)

@@ -25,8 +25,12 @@
  """
 
 import datetime
+import time
 import config as cf
 from DISClib.ADT import list as lt
+from DISClib.Algorithms.Sorting import insertionsort as inser
+from DISClib.Algorithms.Sorting import mergesort as ms
+from DISClib.Algorithms.Sorting import quicksort as qs
 from DISClib.Algorithms.Sorting import shellsort as sa
 assert cf
 
@@ -50,7 +54,7 @@ def newCatalog():
     if TipoDeLista == 'll':
         catalog['artists'] = lt.newList('SINGLE_LINKED', cmpfunction=compareartist)
         catalog['artworks'] = lt.newList('SINGLE_LINKED', cmpfunction=compareartworks)
-    if TipoDeLista == 'al':
+    elif TipoDeLista == 'al':
         catalog['artists'] = lt.newList('ARRAY_LIST', cmpfunction=compareartist)
         catalog['artworks'] = lt.newList('ARRAY_LIST', cmpfunction=compareartworks)
     else:
@@ -128,3 +132,21 @@ def compareartworks(artworkname1,artwork):
     else:
         return -1
 # Funciones de ordenamiento
+
+def sortArtworksDateAcquired(catalog, size):
+    sub_list = lt.subList(catalog['artworks'], 1, size)
+    sub_list = sub_list.copy()
+    TipoDeOrdenamiento = input("¿Qué tipo de ordenamiento desea utilizar? \n'is':para InsertionSort \n 'ms': para MergeSort \n 'qs': para QuickSort \n 'sa': Para ShellSort ")
+    start_time = time.process_time()
+    if TipoDeOrdenamiento == 'is':
+        sorted_list = inser.sort(sub_list, cmpArtworkByDateAcquired)
+    elif TipoDeOrdenamiento == 'ms':
+        sorted_list = ms.sort(sub_list, cmpArtworkByDateAcquired)
+    elif TipoDeOrdenamiento == 'qs':
+        sorted_list = qs.sort(sub_list, cmpArtworkByDateAcquired)
+    elif TipoDeOrdenamiento == 'sa':
+        sorted_list = sa.sort(sub_list, cmpArtworkByDateAcquired)
+        
+    stop_time = time.process_time()
+    elapsed_time_mseg = (stop_time - start_time)*1000
+    return elapsed_time_mseg, sorted_list
