@@ -152,3 +152,22 @@ def sortArtworksDateAcquired(catalog, size):
     stop_time = time.process_time()
     elapsed_time_mseg = (stop_time - start_time)*1000
     return elapsed_time_mseg, sorted_list
+
+
+#Funciones para requerimiento 3
+
+def buscar_artista_constituentID(catalog, nombre):
+    artistas = catalog["artists"]
+    for artist in artistas:
+        if artist["DisplayName"] == nombre:
+            return artist["ConstituentID"]
+
+def total_obras(catalog, nombre):
+    id = buscar_artista_constituentID(catalog, nombre)
+    obras = catalog["artworks"]
+    contador = 0
+    for obra in obras:
+        if obra["ConstituentID"] == id:
+            contador += 1
+    return contador
+
