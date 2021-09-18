@@ -81,3 +81,6 @@ def sortArtworksDateAcquired(catalog, size):
     return model.sortArtworksDateAcquired(catalog, size)
 
 # Funciones de consulta sobre el catálogo
+
+#Funciones Req 3
+

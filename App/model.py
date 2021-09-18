@@ -171,3 +171,19 @@ def total_obras(catalog, nombre):
             contador += 1
     return contador
 
+def lista_total_tecnicas(catalog, nombre):
+    id = buscar_artista_constituentID(catalog, nombre)
+    obras = catalog["artworks"]
+    lista = lt.newList()
+    for obra in obras:
+        if obra["ConstituentID"] == id:
+            lt.addLast(lista, obra)
+    return lista, lt.size(lista)
+
+def tecnica_mas_utilizada(lista):
+    return None
+    
+
+    
+
+
