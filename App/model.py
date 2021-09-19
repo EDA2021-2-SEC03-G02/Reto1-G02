@@ -104,7 +104,7 @@ def cmpArtworkByDateAcquired(artwork1, artwork2):
 
     strdateArt2= artwork2['DateAcquired']
     if len(strdateArt2) == 0:
-        return False
+        return True
     year2=int(strdateArt2[0]+strdateArt2[1]+strdateArt2[2]+strdateArt2[3])
     month2=int(strdateArt2[5]+strdateArt2[6])
     day2=int(strdateArt2[8]+strdateArt2[9])

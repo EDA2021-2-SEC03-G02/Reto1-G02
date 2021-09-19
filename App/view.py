@@ -66,7 +66,7 @@ def Last3Artworks(catalog):
     return controller.getLast3Artworks(catalog)
 
 
-def printSortResultsArtworks(ord_artworks, sample=10):
+def printSortResultsArtworks(ord_artworks, sample=700):
     size = lt.size(ord_artworks)
     if size>sample:
         print("Las primeras", sample, "obras ordenadas son:")
