@@ -20,7 +20,7 @@
  * along withthis program.  If not, see <http://www.gnu.org/licenses/>.
  """
 
-from App.controller import lista_total_tecnicas
+
 import config as cf
 import sys
 import controller
@@ -116,7 +116,7 @@ while True:
             print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
                                           str(result[0]))
             printSortResultsArtworks(result[1])
-    elif int(inputs[0] == 4):
+    elif int(inputs[0]) == 4:
         nombre = input("Indique el nombre del artista del cual desea conocer cuál fue su técnica más usada")
         total_obras = controller.total_obras(catalog, nombre)
         print("El artista " + str(nombre) + "produjo un total de " +str(total_obras) + "obras")
