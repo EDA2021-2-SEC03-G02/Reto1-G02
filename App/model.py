@@ -180,7 +180,20 @@ def lista_total_tecnicas(catalog, nombre):
             lt.addLast(lista, obra)
     return lista, lt.size(lista)
 
-#def tecnica_mas_utilizada(lista):
+def tecnica_mas_utilizada(lista):
+    sin_repeticion = set(lista["Medium"])
+    mas_frecuente = max(sin_repeticion, key=sin_repeticion.count())
+    return mas_frecuente
+
+def lista_tecnicas_mas_usadas(lista, tecnica):
+    x = lt.newList(cmpfunction=compareartworks)
+    for obra in lista:
+        if obra["Medium"] == tecnica:
+            lt.addLast(x, obra)
+    return x
+
+
+
     
     
 
