@@ -158,17 +158,14 @@ def sortArtworksDateAcquired(catalog, size):
 
 def buscar_artista_constituentID(catalog, nombre):
     artistas = catalog["artists"]
-    nombres = artistas["DisplayName"]
-    pos = lt.isPresent(nombres, nombre)
-    encontrado = artistas[pos]
-    id = encontrado["ConstituentID"]
-    """for artist in artistas:
-        if artist["DisplayName"] == nombre:
-            return artist["ConstituentID"]"""
-    return id
+    for artist in artistas:
+        print(artist)
+        if (str(nombre)) == (str(artist["DisplayName"])):
+            return artist["ConstituentID"]
 
 def total_obras(catalog, nombre):
-    id = buscar_artista_constituentID(catalog, nombre)
+    id = buscar_artista_constituentID(catalog, str(nombre))
+    print(id)
     obras = catalog["artworks"]
     contador = 0
     for obra in obras:
