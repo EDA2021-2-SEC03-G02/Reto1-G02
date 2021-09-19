@@ -158,9 +158,14 @@ def sortArtworksDateAcquired(catalog, size):
 
 def buscar_artista_constituentID(catalog, nombre):
     artistas = catalog["artists"]
-    for artist in artistas:
+    nombres = artistas["DisplayName"]
+    pos = lt.isPresent(nombres, nombre)
+    encontrado = artistas[pos]
+    id = encontrado["ConstituentID"]
+    """for artist in artistas:
         if artist["DisplayName"] == nombre:
-            return artist["ConstituentID"]
+            return artist["ConstituentID"]"""
+    return id
 
 def total_obras(catalog, nombre):
     id = buscar_artista_constituentID(catalog, nombre)
@@ -182,8 +187,9 @@ def lista_total_tecnicas(catalog, nombre):
 
 def tecnica_mas_utilizada(lista):
     sin_repeticion = set(lista["Medium"])
+    tamano = len(sin_repeticion)
     mas_frecuente = max(sin_repeticion, key=sin_repeticion.count())
-    return mas_frecuente
+    return mas_frecuente, tamano
 
 def lista_tecnicas_mas_usadas(lista, tecnica):
     x = lt.newList(cmpfunction=compareartworks)

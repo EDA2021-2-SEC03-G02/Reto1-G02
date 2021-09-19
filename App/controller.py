@@ -95,3 +95,7 @@ def lista_total_tecnicas(catalog, nombre):
 def tecnica_mas_utilizada(lista):
     return model.tecnica_mas_utilizada(lista)
 
+def lista_tecnicas_mas_usadas(lista, tecnica):
+    return model.lista_tecnicas_mas_usadas(lista, tecnica)
+
+
