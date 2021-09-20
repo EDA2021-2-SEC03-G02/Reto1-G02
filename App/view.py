@@ -108,7 +108,7 @@ while True:
     elif int(inputs[0]) == 2:
         pass
     elif int(inputs[0])== 3:
-        size = int(input('Ingrese el tamaño del archivo'))
+        size = int(input('Ingrese el tamaño del archivo: '))
         anio1 = int(input("Indique desde que anio desea la muestra: "))
         anio2 = int(input("Indique hasta que anio desea la muestra: "))
         if size > lt.size(catalog["artworks"]):

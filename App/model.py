@@ -144,17 +144,20 @@ def compareartworksmedium(artwork1,artwork2):
 # Funciones de ordenamiento
 
 def sortArtworksDateAcquired(catalog, anio1, anio2):
-    sublist=[]
+    sublist  =  lt.newList(cmpfunction=compareartworks)
     strdateArt1=None
-    for artwork in catalog['artworks']:
+    obras =catalog["artworks"]
+    for artwork in lt.iterator(obras):
         strdateArt1 = artwork['DateAcquired']
         if len(strdateArt1) == 0:
             year1=0000
         else:
             year1=int(strdateArt1[0]+strdateArt1[1]+strdateArt1[2]+strdateArt1[3])
-        if year1 >= anio1 and year1 <= anio2:
-            sublist.append(artwork)
+            print(year1)
+        if year1 >= int(anio1) and year1 <= int(anio2):
+            lt.addLast(sublist, artwork)       
     sub_list = sublist.copy()
+    print(sub_list)
     TipoDeOrdenamiento = input("¿Qué tipo de ordenamiento desea utilizar? \n'is':para InsertionSort \n 'ms': para MergeSort \n 'qs': para QuickSort \n 'sa': Para ShellSort ")
     start_time = time.process_time()
     if TipoDeOrdenamiento == 'is':
@@ -165,7 +168,6 @@ def sortArtworksDateAcquired(catalog, anio1, anio2):
         sorted_list = qs.sort(sub_list, cmpArtworkByDateAcquired)
     elif TipoDeOrdenamiento == 'sa':
         sorted_list = sa.sort(sub_list, cmpArtworkByDateAcquired)
-
     stop_time = time.process_time()
     elapsed_time_mseg = (stop_time - start_time)*1000
     return elapsed_time_mseg, sorted_list
