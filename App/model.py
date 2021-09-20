@@ -176,14 +176,17 @@ def total_obras(catalog, nombre):
     obras = catalog["artworks"]
     contador = 0
     for obra in lt.iterator(obras):
-        cadena = obra["ConstituentID"] 
+        cadena = obra["ConstituentID"]
+        cadena = cadena.replace("[","")
+        cadena = cadena.replace("]","") 
         lista = cadena.split(",")
         print(lista)
         for numero in lista:
-            if id in numero:
+            if str(id) == numero:
                 contador += 1
                 print(contador)
     return contador
+#LISTOOOOOo
 
 def lista_total_tecnicas(catalog, nombre):
     id = buscar_artista_constituentID(catalog, nombre)
