@@ -117,15 +117,14 @@ while True:
                                           str(result[0]))
             printSortResultsArtworks(result[1])
     elif int(inputs[0]) == 4:
-        nombre = input("Indique el nombre del artista del cual desea conocer cuál fue su técnica más usada")
+        nombre = input("Indique el nombre del artista del cual desea conocer cuál fue su técnica más usada: ")
         total_obras = controller.total_obras(catalog, nombre)
-        print("El artista " + str(nombre) + "produjo un total de " +str(total_obras) + "obras")
+        print("El artista " + str(nombre) + " produjo un total de " +str(total_obras) + " obras")
         lista_obras_artista = controller.lista_total_tecnicas(catalog, nombre)
         lista_obras_artista_f = lista_obras_artista[0]
-        print(lista_obras_artista[1])
+        #print(lista_obras_artista[1])
         mas_frecuente = controller.tecnica_mas_utilizada(lista_obras_artista_f)
-        mas_frecuente_f = mas_frecuente[0]
-        lista_mega_final = controller.lista_tecnicas_mas_usadas(lista_obras_artista_f, mas_frecuente_f)
+        lista_mega_final = controller.lista_tecnicas_mas_usadas(lista_obras_artista_f, mas_frecuente[0])
         print("El total de medios utilizados por el artista fue de: " + str(mas_frecuente[1]))
         printObrasXMedioArtista(lista_mega_final)
     else:

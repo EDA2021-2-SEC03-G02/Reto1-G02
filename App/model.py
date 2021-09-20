@@ -133,6 +133,14 @@ def compareartworks(artworkname1,artwork):
         return 0
     else:
         return -1
+
+def compareartworksmedium(artwork1,artwork2):
+    if artwork1['Medium'] > artwork2['Medium']:
+        return 1
+    elif artwork1['Medium'] == artwork2['Medium']:
+        return 0
+    else:
+        return -1
 # Funciones de ordenamiento
 
 def sortArtworksDateAcquired(catalog, size):
@@ -158,39 +166,58 @@ def sortArtworksDateAcquired(catalog, size):
 
 def buscar_artista_constituentID(catalog, nombre):
     artistas = catalog["artists"]
-    for artist in artistas:
-        print(artist)
+    for artist in lt.iterator(artistas):
         if (str(nombre)) == (str(artist["DisplayName"])):
             return artist["ConstituentID"]
+#LISTOOOOOO
 
 def total_obras(catalog, nombre):
-    id = buscar_artista_constituentID(catalog, str(nombre))
-    print(id)
+    id = buscar_artista_constituentID(catalog, nombre)
     obras = catalog["artworks"]
     contador = 0
-    for obra in obras:
-        if obra["ConstituentID"] == id:
-            contador += 1
+    for obra in lt.iterator(obras):
+        cadena = obra["ConstituentID"] 
+        lista = cadena.split(",")
+        print(lista)
+        for numero in lista:
+            if id in numero:
+                contador += 1
+                print(contador)
     return contador
 
 def lista_total_tecnicas(catalog, nombre):
     id = buscar_artista_constituentID(catalog, nombre)
+    print(id)
     obras = catalog["artworks"]
     lista = lt.newList('ARRAY_LIST', cmpfunction=compareartworks)
-    for obra in obras:
+    for obra in lt.iterator(obras):
         if obra["ConstituentID"] == id:
             lt.addLast(lista, obra)
     return lista, lt.size(lista)
 
 def tecnica_mas_utilizada(lista):
-    sin_repeticion = set(lista["Medium"])
-    tamano = len(sin_repeticion)
-    mas_frecuente = max(sin_repeticion, key=sin_repeticion.count())
-    return mas_frecuente, tamano
+    #ordenar por medio
+    ms.sort(lista, compareartworksmedium)
+    maxima = ""
+    contadorM = -1
+    actual = 0
+    x = lt.getElement(lista, 1)
+    actualO = x["Medium"]
+    #revisar medio por medio con 4 variables: actual, contador actual, maximo, contador maximo
+    for obra in lt.iterator(lista):
+        if obra["Medium"] == actualO:
+            actual += 1
+        else:
+            if actual>contadorM:
+                maxima = actualO
+                contadorM = actual
+            actual = 1
+            actualO = obra["Medium"]
+    return maxima, contadorM
 
 def lista_tecnicas_mas_usadas(lista, tecnica):
     x = lt.newList(cmpfunction=compareartworks)
-    for obra in lista:
+    for obra in lt.iterator(lista):
         if obra["Medium"] == tecnica:
             lt.addLast(x, obra)
     return x
