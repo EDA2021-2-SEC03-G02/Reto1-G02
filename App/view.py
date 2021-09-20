@@ -79,8 +79,8 @@ def printSortResultsArtworks(ord_artworks, sample=700):
 
 def printObrasXMedioArtista(lista):
     print("Las obras creadas con la téncia más popular del artista son: ")
-    for obra in lista:
-        print("Nombre de la obra: " + obra["Title"] + "Fecha de creación: " + obra["Date"] + "Medio/Técnica: " + obra["Medium"] + "Dimensiones: " + obra["Dimensions"])
+    for obra in lt.iterator(lista):
+        print("Nombre de la obra: " + obra["Title"] + " --- Fecha de creación: " + obra["Date"] + " --- Medio/Técnica: " + obra["Medium"] + " --- Dimensiones: " + obra["Dimensions"])
     pass
 
 catalog = None
@@ -122,10 +122,10 @@ while True:
         print("El artista " + str(nombre) + " produjo un total de " +str(total_obras) + " obras")
         lista_obras_artista = controller.lista_total_tecnicas(catalog, nombre)
         lista_obras_artista_f = lista_obras_artista[0]
-        #print(lista_obras_artista[1])
         mas_frecuente = controller.tecnica_mas_utilizada(lista_obras_artista_f)
         lista_mega_final = controller.lista_tecnicas_mas_usadas(lista_obras_artista_f, mas_frecuente[0])
         print("El total de medios utilizados por el artista fue de: " + str(mas_frecuente[1]))
+        print("La técnica más utlizada por el artista fue: "+str(mas_frecuente[0]))
         printObrasXMedioArtista(lista_mega_final)
     else:
         sys.exit(0)

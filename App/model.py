@@ -180,23 +180,26 @@ def total_obras(catalog, nombre):
         cadena = cadena.replace("[","")
         cadena = cadena.replace("]","") 
         lista = cadena.split(",")
-        print(lista)
         for numero in lista:
             if str(id) == numero:
                 contador += 1
-                print(contador)
     return contador
-#LISTOOOOOo
+#LISTOOOOO
 
 def lista_total_tecnicas(catalog, nombre):
     id = buscar_artista_constituentID(catalog, nombre)
-    print(id)
     obras = catalog["artworks"]
     lista = lt.newList('ARRAY_LIST', cmpfunction=compareartworks)
     for obra in lt.iterator(obras):
-        if obra["ConstituentID"] == id:
-            lt.addLast(lista, obra)
+        cadena = obra["ConstituentID"]
+        cadena = cadena.replace("[","")
+        cadena = cadena.replace("]","") 
+        lista_nueva = cadena.split(",")
+        for numero in lista_nueva:
+            if str(id) == numero:
+                lt.addLast(lista, obra)
     return lista, lt.size(lista)
+#LISTOOOOOOO
 
 def tecnica_mas_utilizada(lista):
     #ordenar por medio
@@ -206,17 +209,24 @@ def tecnica_mas_utilizada(lista):
     actual = 0
     x = lt.getElement(lista, 1)
     actualO = x["Medium"]
+    tecnicas = 1
     #revisar medio por medio con 4 variables: actual, contador actual, maximo, contador maximo
     for obra in lt.iterator(lista):
         if obra["Medium"] == actualO:
             actual += 1
+            actualO = obra["Medium"]
         else:
+            tecnicas += 1
             if actual>contadorM:
                 maxima = actualO
                 contadorM = actual
             actual = 1
             actualO = obra["Medium"]
-    return maxima, contadorM
+    if actual>contadorM:
+        maxima = actualO
+        contadorM = actual
+    return maxima, tecnicas
+#LISTOOOOOO
 
 def lista_tecnicas_mas_usadas(lista, tecnica):
     x = lt.newList(cmpfunction=compareartworks)
@@ -224,6 +234,7 @@ def lista_tecnicas_mas_usadas(lista, tecnica):
         if obra["Medium"] == tecnica:
             lt.addLast(x, obra)
     return x
+#LISTOOOOOO
 
 
 
