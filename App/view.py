@@ -72,7 +72,7 @@ def printSortResultsArtworks(ord_artworks, sample=10):
         i = 1
         while i <= sample:
             artwork = lt.getElement(ord_artworks,i)
-            print("Identificador único de la obra: " + artwork["ObjectID"] + " Día de adquisición: " + artwork["DateAcquired"] )
+            print("Título y artista: " + artwork["Title"] + ", día de adquisición: " + artwork["DateAcquired"] + ", medio: " + artwork["Medium"] + ", dimensiones: " + artwork["Dimensions"])
             i += 1
     pass
 
@@ -101,11 +101,13 @@ while True:
     elif int(inputs[0]) == 2:
         pass
     elif int(inputs[0])== 3:
-        size = int(input("Indique tamaño de la muestra: "))
+        size = int(input('Ingrese el tamaño del archivo'))
+        anio1 = int(input("Indique desde que anio desea la muestra: "))
+        anio2 = int(input("Indique hasta que anio desea la muestra: "))
         if size > lt.size(catalog["artworks"]):
             print("Elija un tamaño válido, menor o igual a la cantidad total de obras")
         else:
-            result = controller.sortArtworksDateAcquired(catalog, size) 
+            result = controller.sortArtworksDateAcquired(catalog, anio1, anio2) 
             print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
                                           str(result[0]))
             printSortResultsArtworks(result[1])

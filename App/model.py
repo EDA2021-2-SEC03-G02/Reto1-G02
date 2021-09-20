@@ -135,9 +135,18 @@ def compareartworks(artworkname1,artwork):
         return -1
 # Funciones de ordenamiento
 
-def sortArtworksDateAcquired(catalog, size):
-    sub_list = lt.subList(catalog['artworks'], 1, size)
-    sub_list = sub_list.copy()
+def sortArtworksDateAcquired(catalog, anio1, anio2):
+    sublist=[]
+    strdateArt1=None
+    for artwork in catalog['artworks']:
+        strdateArt1 = artwork['DateAcquired']
+        if len(strdateArt1) == 0:
+            year1=0000
+        else:
+            year1=int(strdateArt1[0]+strdateArt1[1]+strdateArt1[2]+strdateArt1[3])
+        if year1 >= anio1 and year1 <= anio2:
+            sublist.append(artwork)
+    sub_list = sublist.copy()
     TipoDeOrdenamiento = input("¿Qué tipo de ordenamiento desea utilizar? \n'is':para InsertionSort \n 'ms': para MergeSort \n 'qs': para QuickSort \n 'sa': Para ShellSort ")
     start_time = time.process_time()
     if TipoDeOrdenamiento == 'is':

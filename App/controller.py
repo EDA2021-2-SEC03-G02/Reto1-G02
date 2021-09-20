@@ -74,10 +74,10 @@ def getLast3Artworks(catalog):
 # Funciones para la carga de datos
 
 # Funciones de ordenamiento
-def sortArtworksDateAcquired(catalog, size):
+def sortArtworksDateAcquired(catalog, anio1, anio2):
     """
     Ordena los libros por average_rating
     """
-    return model.sortArtworksDateAcquired(catalog, size)
+    return model.sortArtworksDateAcquired(catalog, anio1, anio2)
 
 # Funciones de consulta sobre el catálogo
