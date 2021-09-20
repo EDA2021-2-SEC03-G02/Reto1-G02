@@ -104,7 +104,7 @@ def cmpArtworkByDateAcquired(artwork1, artwork2):
 
     strdateArt2= artwork2['DateAcquired']
     if len(strdateArt2) == 0:
-        return False
+        return True
     year2=int(strdateArt2[0]+strdateArt2[1]+strdateArt2[2]+strdateArt2[3])
     month2=int(strdateArt2[5]+strdateArt2[6])
     day2=int(strdateArt2[8]+strdateArt2[9])
@@ -130,6 +130,14 @@ def compareartworks(artworkname1,artwork):
     if artworkname1['ObjectID'] > artwork['ObjectID']:
         return 1
     elif artworkname1['ObjectID'] == artwork['ObjectID']:
+        return 0
+    else:
+        return -1
+
+def compareartworksmedium(artwork1,artwork2):
+    if artwork1['Medium'] > artwork2['Medium']:
+        return 1
+    elif artwork1['Medium'] == artwork2['Medium']:
         return 0
     else:
         return -1
@@ -161,3 +169,87 @@ def sortArtworksDateAcquired(catalog, anio1, anio2):
     stop_time = time.process_time()
     elapsed_time_mseg = (stop_time - start_time)*1000
     return elapsed_time_mseg, sorted_list
+
+
+#Funciones para requerimiento 3
+
+def buscar_artista_constituentID(catalog, nombre):
+    artistas = catalog["artists"]
+    for artist in lt.iterator(artistas):
+        if (str(nombre)) == (str(artist["DisplayName"])):
+            return artist["ConstituentID"]
+#LISTOOOOOO
+
+def total_obras(catalog, nombre):
+    id = buscar_artista_constituentID(catalog, nombre)
+    obras = catalog["artworks"]
+    contador = 0
+    for obra in lt.iterator(obras):
+        cadena = obra["ConstituentID"]
+        cadena = cadena.replace("[","")
+        cadena = cadena.replace("]","") 
+        lista = cadena.split(",")
+        for numero in lista:
+            if str(id) == numero:
+                contador += 1
+    return contador
+#LISTOOOOO
+
+def lista_total_tecnicas(catalog, nombre):
+    id = buscar_artista_constituentID(catalog, nombre)
+    obras = catalog["artworks"]
+    lista = lt.newList('ARRAY_LIST', cmpfunction=compareartworks)
+    for obra in lt.iterator(obras):
+        cadena = obra["ConstituentID"]
+        cadena = cadena.replace("[","")
+        cadena = cadena.replace("]","") 
+        lista_nueva = cadena.split(",")
+        for numero in lista_nueva:
+            if str(id) == numero:
+                lt.addLast(lista, obra)
+    return lista, lt.size(lista)
+#LISTOOOOOOO
+
+def tecnica_mas_utilizada(lista):
+    #ordenar por medio
+    ms.sort(lista, compareartworksmedium)
+    maxima = ""
+    contadorM = -1
+    actual = 0
+    x = lt.getElement(lista, 1)
+    actualO = x["Medium"]
+    tecnicas = 1
+    #revisar medio por medio con 4 variables: actual, contador actual, maximo, contador maximo
+    for obra in lt.iterator(lista):
+        if obra["Medium"] == actualO:
+            actual += 1
+            actualO = obra["Medium"]
+        else:
+            tecnicas += 1
+            if actual>contadorM:
+                maxima = actualO
+                contadorM = actual
+            actual = 1
+            actualO = obra["Medium"]
+    if actual>contadorM:
+        maxima = actualO
+        contadorM = actual
+    return maxima, tecnicas
+#LISTOOOOOO
+
+def lista_tecnicas_mas_usadas(lista, tecnica):
+    x = lt.newList(cmpfunction=compareartworks)
+    for obra in lt.iterator(lista):
+        if obra["Medium"] == tecnica:
+            lt.addLast(x, obra)
+    return x
+#LISTOOOOOO
+
+
+
+    
+    
+
+    
+
+

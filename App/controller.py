@@ -81,3 +81,21 @@ def sortArtworksDateAcquired(catalog, anio1, anio2):
     return model.sortArtworksDateAcquired(catalog, anio1, anio2)
 
 # Funciones de consulta sobre el catálogo
+
+#Funciones Req 3
+def buscar_artista_constituentID(catalog, nombre):
+    return model.buscar_artista_constituentID(catalog, nombre)
+
+def total_obras(catalog, nombre):
+    return model.total_obras(catalog,nombre)
+
+def lista_total_tecnicas(catalog, nombre):
+    return model.lista_total_tecnicas(catalog, nombre)
+
+def tecnica_mas_utilizada(lista):
+    return model.tecnica_mas_utilizada(lista)
+
+def lista_tecnicas_mas_usadas(lista, tecnica):
+    return model.lista_tecnicas_mas_usadas(lista, tecnica)
+
+
