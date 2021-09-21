@@ -313,15 +313,17 @@ def ClasificaconPorNacionalidades(catalog):
 #Funciones para requerimiento 1
 def sublistaRangoArtistas(catalog, year1, year2):
     artistas = catalog["artists"]
-    artistas = ms.sort(artistas, compareArtistsYearBorn)
+    ms.sort(artistas, compareArtistsYearBorn)
     for x in lt.iterator(artistas):
-        print(x["BeginDate"])
+        if x["BeginDate"] != "0":
+            print(x["BeginDate"])
     sublist = lt.newList(cmpfunction=compareartist)
     for artist in lt.iterator(artistas):
         year = int(artist["BeginDate"])
         if year !=0:   
             if year >= year1 and year <= year2:
                 lt.addLast(sublist, artist)
+    ms.sort(sublist, compareArtistsYearBorn)
     return sublist, lt.size(sublist)
 
 
