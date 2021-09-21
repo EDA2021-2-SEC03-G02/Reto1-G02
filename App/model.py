@@ -189,8 +189,11 @@ def sublistaRangoArtistas(catalog, year1, year2):
     sublist = lt.newList(cmpfunction=compareartist)
     for artist in lt.iterator(artistas):
         year = int(artist["BeginDate"])
-        if year >= year1 or year <= year2:
-            lt.addLast(sublist, artist)
+        if year == 0:
+            pass
+        else:   
+            if year >= year1 or year <= year2:
+                lt.addLast(sublist, artist)
     return sublist, lt.size(sublist)
 
 
