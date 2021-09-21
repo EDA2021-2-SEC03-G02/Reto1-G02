@@ -108,16 +108,20 @@ while True:
     elif int(inputs[0]) == 2:
         pass
     elif int(inputs[0])== 3:
-        size = int(input('Ingrese el tamaño del archivo: '))
         anio1 = int(input("Indique desde que anio desea la muestra: "))
+        mes1 = int(input("Indique desde que mes desea la muestra: "))
+        dia1 = int(input("Indique desde que dia desea la muestra: "))
         anio2 = int(input("Indique hasta que anio desea la muestra: "))
-        if size > lt.size(catalog["artworks"]):
-            print("Elija un tamaño válido, menor o igual a la cantidad total de obras")
-        else:
-            result = controller.sortArtworksDateAcquired(catalog, anio1, anio2) 
-            print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
-                                          str(result[0]))
-            printSortResultsArtworks(result[1])
+        mes2 = int(input("Indique hasta que mes desea la muestra: "))
+        dia2 = int(input("Indique hasta que dia desea la muestra: "))
+
+        result = controller.sortArtworksDateAcquired(catalog, anio1, anio2, mes1, mes2, dia1, dia2) 
+        print("Para la muestra del total de elementos, el tiempo (mseg) es: ", str(result[0]))
+        print("El número total de obras en el rango de tiempo es: ", str(result[1]))
+        print("El número total de obras compradas en el rango de tiempo es: ", str(result[2]))
+        print("Las primeras 3 obras en el rango de tiempo son: ", str(result[3]))
+        print("Las ultimas 3 obras en el rango de tiempo es: ", str(result[4]))
+
     elif int(inputs[0]) == 4:
         nombre = input("Indique el nombre del artista del cual desea conocer cuál fue su técnica más usada: ")
         total_obras = controller.total_obras(catalog, nombre)
@@ -129,6 +133,8 @@ while True:
         print("El total de medios utilizados por el artista fue de: " + str(mas_frecuente[1]))
         print("La técnica más utlizada por el artista fue: "+str(mas_frecuente[0]))
         printObrasXMedioArtista(lista_mega_final)
+    elif int(inputs[0]) == 5:
+        controller.ClasificaconPorNacionalidades(catalog)
     else:
         sys.exit(0)
 sys.exit(0)

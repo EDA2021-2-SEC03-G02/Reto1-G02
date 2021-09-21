@@ -74,11 +74,11 @@ def getLast3Artworks(catalog):
 # Funciones para la carga de datos
 
 # Funciones de ordenamiento
-def sortArtworksDateAcquired(catalog, anio1, anio2):
+def sortArtworksDateAcquired(catalog, anio1, anio2, mes1, mes2, dia1, dia2):
     """
     Ordena los libros por average_rating
     """
-    return model.sortArtworksDateAcquired(catalog, anio1, anio2)
+    return model.sortArtworksDateAcquired(catalog, anio1, anio2, mes1, mes2, dia1, dia2)
 
 # Funciones de consulta sobre el catálogo
 
@@ -97,5 +97,8 @@ def tecnica_mas_utilizada(lista):
 
 def lista_tecnicas_mas_usadas(lista, tecnica):
     return model.lista_tecnicas_mas_usadas(lista, tecnica)
+
+def ClasificaconPorNacionalidades(catalog):
+    return model.ClasificaconPorNacionalidades(catalog)
 
 

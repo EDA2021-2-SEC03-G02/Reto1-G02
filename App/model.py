@@ -27,6 +27,7 @@
 import datetime
 import time
 import config as cf
+import operator
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import insertionsort as inser
 from DISClib.Algorithms.Sorting import mergesort as ms
@@ -143,34 +144,43 @@ def compareartworksmedium(artwork1,artwork2):
         return -1
 # Funciones de ordenamiento
 
-def sortArtworksDateAcquired(catalog, anio1, anio2):
+def sortArtworksDateAcquired(catalog, anio1, anio2, mes1, mes2, dia1, dia2):
     sublist  =  lt.newList(cmpfunction=compareartworks)
     strdateArt1=None
     obras =catalog["artworks"]
     for artwork in lt.iterator(obras):
         strdateArt1 = artwork['DateAcquired']
         if len(strdateArt1) == 0:
-            year1=0000
+            year=0000
         else:
-            year1=int(strdateArt1[0]+strdateArt1[1]+strdateArt1[2]+strdateArt1[3])
-            print(year1)
-        if year1 >= int(anio1) and year1 <= int(anio2):
-            lt.addLast(sublist, artwork)       
+            year=int(strdateArt1[0]+strdateArt1[1]+strdateArt1[2]+strdateArt1[3])
+            month= int(strdateArt1[5]+strdateArt1[6])
+            day= int(strdateArt1[8]+strdateArt1[9])
+        if (year >= int(anio1) and year <= int(anio2)) and (month >= int(mes1) and month <= int(mes2)) and (day >= int(dia1) and day <= int(dia2)):
+            lt.addLast(sublist, artwork)               
     sub_list = sublist.copy()
-    print(sub_list)
-    TipoDeOrdenamiento = input("¿Qué tipo de ordenamiento desea utilizar? \n'is':para InsertionSort \n 'ms': para MergeSort \n 'qs': para QuickSort \n 'sa': Para ShellSort ")
     start_time = time.process_time()
-    if TipoDeOrdenamiento == 'is':
-        sorted_list = inser.sort(sub_list, cmpArtworkByDateAcquired)
-    elif TipoDeOrdenamiento == 'ms':
-        sorted_list = ms.sort(sub_list, cmpArtworkByDateAcquired)
-    elif TipoDeOrdenamiento == 'qs':
-        sorted_list = qs.sort(sub_list, cmpArtworkByDateAcquired)
-    elif TipoDeOrdenamiento == 'sa':
-        sorted_list = sa.sort(sub_list, cmpArtworkByDateAcquired)
+    sorted_list = ms.sort(sub_list, cmpArtworkByDateAcquired)
     stop_time = time.process_time()
+    print(str(sorted_list))
+
+    purchaseList = lt.newList(cmpfunction=compareartworks)
+    for artwork in lt.iterator(sorted_list):
+        if "Purchase" in artwork["CreditLine"]:
+            lt.addLast(purchaseList, artwork)
+    listFirst3 = sorted_list.copy()
+    if len(listFirst3)>2:
+        first3= lt.subList(listFirst3,0,3)
+        last3 = lt.subList(listFirst3, len(listFirst3)-3, 3)
+    else:
+        first3= lt.subList(listFirst3)
+        last3 = lt.subList(listFirst3)  
+                    
+                       
+    numPurchase = len(purchaseList)
+    num = len(sorted_list)
     elapsed_time_mseg = (stop_time - start_time)*1000
-    return elapsed_time_mseg, sorted_list
+    return elapsed_time_mseg, num, numPurchase, first3, last3
 
 
 #Funciones para requerimiento 3
@@ -246,6 +256,32 @@ def lista_tecnicas_mas_usadas(lista, tecnica):
             lt.addLast(x, obra)
     return x
 #LISTOOOOOO
+
+#Req 4
+def ClasificaconPorNacionalidades(catalog):
+
+    obras =catalog["artworks"]
+    artistas = catalog["artists"]
+    idArtistas = lt.newList(cmpfunction=compareartworks)
+    for artwork in lt.iterator(obras):
+        lt.addLast(idArtistas, artwork['ConstituentID'])         
+    print(idArtistas)
+    diccPaises={}
+    i=0
+    for artista in lt.iterator(artistas):
+        while i < len(idArtistas):
+            if artista['ConstituentID'] in idArtistas[i]:
+                if artista["Nationality"] not in diccPaises:
+                   diccPaises[artista["Nationality"]]=1
+                else:
+                   diccPaises[artista["Nationality"]]+=1    
+            i+=1
+
+    print(str(diccPaises))            
+
+    aaaa=""
+
+    return aaaa
 
 
 
