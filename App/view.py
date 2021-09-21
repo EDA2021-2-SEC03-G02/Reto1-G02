@@ -106,7 +106,8 @@ while True:
         a1=Last3Artworks(catalog)
         print(a1)
     elif int(inputs[0]) == 2:
-        pass
+        year1 = int(input("Por favor elija el año 1, con el que se dará inicio al rango"))
+        year2 = int(input("Por favor seleccione el año 2, con el que se dará fin al rango"))
     elif int(inputs[0])== 3:
         size = int(input('Ingrese el tamaño del archivo: '))
         anio1 = int(input("Indique desde que anio desea la muestra: "))
