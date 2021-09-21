@@ -148,16 +148,23 @@ def sortArtworksDateAcquired(catalog, anio1, anio2, mes1, mes2, dia1, dia2):
     sublist  =  lt.newList(cmpfunction=compareartworks)
     strdateArt1=None
     obras =catalog["artworks"]
+    dateArt1=datetime.datetime(int(anio1),int(mes1),int(dia1))
+    dateArt2=datetime.datetime(int(anio2),int(mes2),int(dia2))
     for artwork in lt.iterator(obras):
         strdateArt1 = artwork['DateAcquired']
         if len(strdateArt1) == 0:
-            year=0000
+            year=1
+            month=1
+            day=1
         else:
             year=int(strdateArt1[0]+strdateArt1[1]+strdateArt1[2]+strdateArt1[3])
             month= int(strdateArt1[5]+strdateArt1[6])
             day= int(strdateArt1[8]+strdateArt1[9])
-        if (year >= int(anio1) and year <= int(anio2)) and (month >= int(mes1) and month <= int(mes2)) and (day >= int(dia1) and day <= int(dia2)):
-            lt.addLast(sublist, artwork)               
+        dateArt3=datetime.datetime(year,month,day)
+        if (dateArt3>= dateArt1) and (dateArt3<= dateArt2):
+            lt.addLast(sublist, artwork)
+            print('aaaa')
+                     
     sub_list = sublist.copy()
     start_time = time.process_time()
     sorted_list = ms.sort(sub_list, cmpArtworkByDateAcquired)
@@ -169,6 +176,7 @@ def sortArtworksDateAcquired(catalog, anio1, anio2, mes1, mes2, dia1, dia2):
         if "Purchase" in artwork["CreditLine"]:
             lt.addLast(purchaseList, artwork)
     listFirst3 = sorted_list.copy()
+    print(listFirst3)
     if len(listFirst3)>2:
         first3= lt.subList(listFirst3,0,3)
         last3 = lt.subList(listFirst3, len(listFirst3)-3, 3)
