@@ -83,6 +83,15 @@ def printObrasXMedioArtista(lista):
         print("Nombre de la obra: " + obra["Title"] + " --- Fecha de creación: " + obra["Date"] + " --- Medio/Técnica: " + obra["Medium"] + " --- Dimensiones: " + obra["Dimensions"])
     pass
 
+def printArtistasNacimiento(lista):
+    for artista in lt.iterator(lista):
+        if artista["EndDate"] == "0":
+            respuesta = "El artista sigue vivo"
+        else:
+            respuesta = artista["EndDate"]
+        print("Nombre del artista: " + artista["DisplayName"] + " --- Fecha de nacimiento: " +artista["BeginDate"] + " --- Año de fallecimiento: " +respuesta+ " --- Nacionalidad: " +artista["Nationality"]+ " --- Género (Male para masculino y Female para femenino): " + artista["Gender"])
+    pass
+
 catalog = None
 a=None
 """
@@ -106,7 +115,17 @@ while True:
         a1=Last3Artworks(catalog)
         print(a1)
     elif int(inputs[0]) == 2:
-        pass
+        year1 = int(input("Por favor elija el año 1, con el que se dará inicio al rango: "))
+        year2 = int(input("Por favor seleccione el año 2, con el que se dará fin al rango: "))
+        sublista = controller.sublistaRangoArtistas(catalog, year1, year2)
+        print("La cantidad de artistas nacidos en este rango de años es de: " + str(sublista[1]))
+        primeros3 = controller.ArtistasNacimientoPrimeros3(sublista[0])
+        ultimos3 = controller.ArtistasNacimientoUltimos3(sublista[0])
+        print("Los primeros 3 artistas nacidos en este rango de años son: ")
+        printArtistasNacimiento(primeros3)
+        print("Los últimos 3 artistas nacidos en este rango de años son: ")
+        printArtistasNacimiento(ultimos3)
+
     elif int(inputs[0])== 3:
         anio1 = int(input("Indique desde que anio desea la muestra: "))
         mes1 = int(input("Indique desde que mes desea la muestra: "))

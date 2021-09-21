@@ -82,6 +82,16 @@ def sortArtworksDateAcquired(catalog, anio1, anio2, mes1, mes2, dia1, dia2):
 
 # Funciones de consulta sobre el catálogo
 
+#Funciones Req 1
+def sublistaRangoArtistas(catalog, year1, year2):
+    return model.sublistaRangoArtistas(catalog, year1, year2)
+
+def ArtistasNacimientoPrimeros3(lista):
+    return model.ArtistasNacimientoPrimeros3(lista)
+
+def ArtistasNacimientoUltimos3(lista):
+    return model.ArtistasNacimientoUltimos3(lista)
+
 #Funciones Req 3
 def buscar_artista_constituentID(catalog, nombre):
     return model.buscar_artista_constituentID(catalog, nombre)

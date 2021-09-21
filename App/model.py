@@ -142,6 +142,16 @@ def compareartworksmedium(artwork1,artwork2):
         return 0
     else:
         return -1
+
+def compareArtistsYearBorn(artist1, artist2):
+    year1 = int(artist1["BeginDate"])
+    year2 = int(artist2["BeginDate"])
+    if year1 > year2:
+        return 1
+    elif year1 == year2:
+        return 0
+    else:
+        return -1
 # Funciones de ordenamiento
 
 def sortArtworksDateAcquired(catalog, anio1, anio2, mes1, mes2, dia1, dia2):
@@ -181,6 +191,30 @@ def sortArtworksDateAcquired(catalog, anio1, anio2, mes1, mes2, dia1, dia2):
     num = len(sorted_list)
     elapsed_time_mseg = (stop_time - start_time)*1000
     return elapsed_time_mseg, num, numPurchase, first3, last3
+
+#Funciones para requerimiento 1
+def sublistaRangoArtistas(catalog, year1, year2):
+    artistas = catalog["artists"]
+    ms.sort(artistas, compareArtistsYearBorn)
+    sublist = lt.newList(cmpfunction=compareartist)
+    for artist in lt.iterator(artistas):
+        year = int(artist["BeginDate"])
+        if year == 0:
+            pass
+        else:   
+            if year >= year1 or year <= year2:
+                lt.addLast(sublist, artist)
+    return sublist, lt.size(sublist)
+
+
+def ArtistasNacimientoPrimeros3(lista):
+    sublista = lt.subList(lista, 1, 3)
+    return sublista
+
+def ArtistasNacimientoUltimos3(lista):
+    sublista = lt.subList(lista, (len(lista))-3, 3)
+    return sublista
+
 
 
 #Funciones para requerimiento 3
