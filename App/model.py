@@ -502,6 +502,21 @@ def ObrasMasCaras(lista):
     print(top_5_caras)
     return top_5_caras
 
+def ArtistaEnObra(catalog, obra):
+    nombres = ""
+    artistas = catalog["artists"]
+    cadena = obra["ConstituentID"]
+    cadena = cadena.replace("[","")
+    cadena = cadena.replace("]","") 
+    lista_nueva = cadena.split(",")
+    for id in lista_nueva:
+        for artista in lt.iterator(artistas):
+            if artista["ConstituentID"] == str(id):
+                nombre = artista["ConstituentID"]
+                nombres += "(" + nombre +")"
+    print(nombres)
+    return nombres
+
 
 
     

@@ -126,3 +126,6 @@ def ObrasMasAntiguas(lista):
 
 def ObrasMasCaras(lista):
     return model.ObrasMasCaras(lista)
+
+def ArtistaEnObra(catalog, obra):
+    return model.ArtistaEnObra(catalog, obra)

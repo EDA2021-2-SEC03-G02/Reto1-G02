@@ -93,6 +93,12 @@ def printArtistasNacimiento(lista):
         print("Nombre del artista: " + artista["DisplayName"] + " --- Fecha de nacimiento: " +artista["BeginDate"] + " --- Año de fallecimiento: " +respuesta+ " --- Nacionalidad: " +artista["Nationality"]+ " --- Género (Male para masculino y Female para femenino, vacío si no se conoce o no aplica): " + artista["Gender"] + ".")
     pass
 
+def printObrasConCostos(lista, catalog):
+    for obra in lt.iterator(lista):
+        artista = controller.ArtistaEnObra(catalog, obra)
+        print("Nombre de la obra: " + obra["Title"] + " --- El/La/Los artistas que crearon la obra son: "+ artista+ " --- Fecha de creación: " + obra["Date"] + " --- Medio/Técnica: " + obra["Medium"] + " --- Dimensiones: " + obra["Dimensions"])
+    pass
+
 catalog = None
 a=None
 """
@@ -168,6 +174,7 @@ while True:
         print("EL peso total del departamento es de: " +str(peso_total)+ " Kg.")
         top5Antiguas = controller.ObrasMasAntiguas(lista)
         top5Caras = controller.ObrasMasCaras(resultado[2])
+
     else:
         sys.exit(0)
 sys.exit(0)
