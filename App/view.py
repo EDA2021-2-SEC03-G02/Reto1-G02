@@ -89,7 +89,7 @@ def printArtistasNacimiento(lista):
             respuesta = "El artista sigue vivo"
         else:
             respuesta = artista["EndDate"]
-        print("Nombre del artista: " + artista["DisplayName"] + " --- Fecha de nacimiento: " +artista["BeginDate"] + " --- Año de fallecimiento: " +respuesta+ " --- Nacionalidad: " +artista["Nationality"]+ " --- Género (Male para masculino y Female para femenino): " + artista["Gender"])
+        print("Nombre del artista: " + artista["DisplayName"] + " --- Fecha de nacimiento: " +artista["BeginDate"] + " --- Año de fallecimiento: " +respuesta+ " --- Nacionalidad: " +artista["Nationality"]+ " --- Género (Male para masculino y Female para femenino, vacío si no se conoce o no aplica): " + artista["Gender"] + ".")
     pass
 
 catalog = None

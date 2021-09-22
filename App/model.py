@@ -326,8 +326,6 @@ def sublistaRangoArtistas(catalog, year1, year2):
         if year !=0:   
             if year >= year1 and year <= year2:
                 lt.addLast(sublist, artist)
-    for x in lt.iterator(sublist):
-        print(x["BeginDate"])
     return sublist, lt.size(sublist)
 
 
@@ -336,6 +334,6 @@ def ArtistasNacimientoPrimeros3(lista):
     return sublista
 
 def ArtistasNacimientoUltimos3(lista):
-    sublista = lt.subList(lista, (len(lista))-3, 3)
+    sublista = lt.subList(lista, lt.size(lista)-3, 3)
     return sublista
 
