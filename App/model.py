@@ -148,10 +148,16 @@ def compareArtistsYearBorn(artist1, artist2):
     b = int(artist2["BeginDate"])
     if a > b:
         return 1
+    else:
+        return 0
+    """a = int(artist1["BeginDate"])
+    b = int(artist2["BeginDate"])
+    if a > b:
+        return 1
     elif a == b:
         return 0
     else:
-        return -1
+        return -1"""
 
 # Funciones de ordenamiento
 
@@ -313,7 +319,7 @@ def ClasificaconPorNacionalidades(catalog):
 #Funciones para requerimiento 1
 def sublistaRangoArtistas(catalog, year1, year2):
     artistas = catalog["artists"]
-    ms.sort(artistas, compareArtistsYearBorn)
+    artistas = ms.sort(artistas, compareArtistsYearBorn)
     for x in lt.iterator(artistas):
         if x["BeginDate"] != "0":
             print(x["BeginDate"])
@@ -323,7 +329,6 @@ def sublistaRangoArtistas(catalog, year1, year2):
         if year !=0:   
             if year >= year1 and year <= year2:
                 lt.addLast(sublist, artist)
-    ms.sort(sublist, compareArtistsYearBorn)
     return sublist, lt.size(sublist)
 
 
