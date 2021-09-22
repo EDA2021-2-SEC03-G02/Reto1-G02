@@ -383,6 +383,7 @@ def ListaPorDepto(catalog, depto):
     return obra, lt.size(sublist)
 
 def CalcularCostoEnvioObra(obra):
+    costo = 43
     if obra["Diameter (cm)"] != "0" and obra["Diameter (cm)"] != "":
         diametro = float(obra["Diameter (cm)"])
         if obra["Height (cm)"] != "0" and obra["Height (cm)"] != "": 
@@ -396,7 +397,24 @@ def CalcularCostoEnvioObra(obra):
             #(72usd/m^2 es equivalente a (9/1250)/cm^2)
     else:
         if obra["Depth (cm)"] != "0" and obra["Depth (cm)"] != "":
-            profunidad = float(obra["Depth (cm)"])
+            profundidad = float(obra["Depth (cm)"])
+            height = float(obra["Height (cm)"])
+            length = float(obra["Length (cm)"])
+            width = obra["Width (cm)"]
+            #Caso 1: Se se tiene height y length, pero no width
+            if (obra["Height (cm)"] != "0" and obra["Height (cm)"] != "") and (obra["Length (cm)"] != "0" and obra["Length (cm)"] != "") and (obra["Width (cm)"] == "0" or obra["Width (cm)"] == ""):
+                volumen = profundidad*height*length
+                costo = (9/125000)*volumen
+            #Caso 2: Si se tiene height y width, pero no length
+            elif (obra["Height (cm)"] != "0" and obra["Height (cm)"] != "") and (obra["Length (cm)"] == "0" or obra["Length (cm)"] == "") and (obra["Width (cm)"] != "0" and obra["Width (cm)"] != ""):
+                volumen = profundidad*height*width
+                costo = (9/125000)*volumen
+            #Caso 3: Si se tiene length y width, pero no height
+            else:
+                volumen = profundidad*length*width
+                costo = (9/125000)*volumen
+        
+
 
 
 
