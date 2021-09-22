@@ -383,24 +383,33 @@ def ListaPorDepto(catalog, depto):
     return obra, lt.size(sublist)
 
 def CalcularCostoEnvioObra(obra):
+    final = 0
+    peso = 0
+    if obra["Weight (kg)"] !="":
+        peso = float(obra["Weight (kg)"])
+    costo_k = peso*72
     costo = 43
+    #Cuando se tiene diametro
     if obra["Diameter (cm)"] != "0" and obra["Diameter (cm)"] != "":
         diametro = float(obra["Diameter (cm)"])
+        #Diametro con altura, como un cilindro
         if obra["Height (cm)"] != "0" and obra["Height (cm)"] != "": 
             altura = float(obra["Height (cm)"])
             volumen = (2*math.pi*((diametro/2)**2))*(altura)
             costo = (9/125000)*volumen
             #(72usd/m^3 es equivalente a (9/125000)/cm^3)
+        #Diametro solo, entonces círculo
         else:
             area = (2*math.pi*((diametro/2)**2))
             costo = (9/1250)*area
             #(72usd/m^2 es equivalente a (9/1250)/cm^2)
     else:
+        #Hay Profundidad, volumen
         if obra["Depth (cm)"] != "0" and obra["Depth (cm)"] != "":
             profundidad = float(obra["Depth (cm)"])
             height = float(obra["Height (cm)"])
             length = float(obra["Length (cm)"])
-            width = obra["Width (cm)"]
+            width = float(obra["Width (cm)"])
             #Caso 1: Se se tiene height y length, pero no width
             if (obra["Height (cm)"] != "0" and obra["Height (cm)"] != "") and (obra["Length (cm)"] != "0" and obra["Length (cm)"] != "") and (obra["Width (cm)"] == "0" or obra["Width (cm)"] == ""):
                 volumen = profundidad*height*length
@@ -413,6 +422,32 @@ def CalcularCostoEnvioObra(obra):
             else:
                 volumen = profundidad*length*width
                 costo = (9/125000)*volumen
+        #No hay profundidad, solo área
+        else:
+            height = float(obra["Height (cm)"])
+            length = float(obra["Length (cm)"])
+            width = float(obra["Width (cm)"])
+            #Caso 1: Se se tiene height y length, pero no width
+            if (obra["Height (cm)"] != "0" and obra["Height (cm)"] != "") and (obra["Length (cm)"] != "0" and obra["Length (cm)"] != "") and (obra["Width (cm)"] == "0" or obra["Width (cm)"] == ""):
+                area = height*length
+                costo = (9/1250)*area
+            #Caso 2: Si se tiene height y width, pero no length
+            elif (obra["Height (cm)"] != "0" and obra["Height (cm)"] != "") and (obra["Length (cm)"] == "0" or obra["Length (cm)"] == "") and (obra["Width (cm)"] != "0" and obra["Width (cm)"] != ""):
+                area = height*width
+                costo = (9/1250)*area
+            #Caso 3: Si se tiene length y width, pero no height
+            else:
+                area = length*width
+                costo = (9/1250)*area
+    if costo > costo_k:
+        final = costo
+    else:
+        final = costo_k
+    return final
+    
+    
+
+
         
 
 
