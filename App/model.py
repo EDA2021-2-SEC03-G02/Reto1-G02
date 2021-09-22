@@ -142,6 +142,14 @@ def compareartworksmedium(artwork1,artwork2):
         return 0
     else:
         return -1
+        
+def compareartworkdepartment(artwork1,artwork2):
+    if artwork1['Department'] > artwork2['Departmen']:
+        return 1
+    elif artwork1['Department'] == artwork2['Department']:
+        return 0
+    else:
+        return -1
 
 def compareArtistsYearBorn(artist1, artist2):
     a = int(artist1["BeginDate"])
@@ -336,4 +344,17 @@ def ArtistasNacimientoPrimeros3(lista):
 def ArtistasNacimientoUltimos3(lista):
     sublista = lt.subList(lista, lt.size(lista)-3, 3)
     return sublista
+
+
+#Funciones para requerimiento 1
+
+def ListaPorDepto(catalog, depto):
+    obras = catalog["artworks"]
+    obras_ordenadas = ms.sort(obras, compareartworkdepartment)
+    sublist = lt.newList(cmpfunciont=compareartworks)
+    for obra in obras_ordenadas:
+        if obra["Department"] == depto:
+            lt.addLast(sublist, obra)
+    return obra
+
 

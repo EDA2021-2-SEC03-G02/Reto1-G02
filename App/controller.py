@@ -111,4 +111,7 @@ def lista_tecnicas_mas_usadas(lista, tecnica):
 def ClasificaconPorNacionalidades(catalog):
     return model.ClasificaconPorNacionalidades(catalog)
 
+#Funciones Req 5
+def ListaPorDepto(catalog, depto):
+    return model.ListaPorDepto
 

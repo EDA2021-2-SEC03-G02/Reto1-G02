@@ -45,6 +45,7 @@ def printMenu():
     print("3- Listar cronológicamente las adquisiciones")
     print("4- Clasificar las obras de un artista por técnica")
     print("5- Clasificar las obras por la nacionalidad de sus creadores")
+    print("6- Calcular costo de envío de un Departamento del museo")
 
 def initCatalog():
     """
@@ -154,6 +155,10 @@ while True:
         printObrasXMedioArtista(lista_mega_final)
     elif int(inputs[0]) == 5:
         controller.ClasificaconPorNacionalidades(catalog)
+    elif int(inputs[0]) == 6:
+        departamento = input("Seleccione el Departamento del cual desea saber su costo total de envío")
+        lista = controller.ListaPorDepto(catalog, departamento)
+        
     else:
         sys.exit(0)
 sys.exit(0)
