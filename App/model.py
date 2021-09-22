@@ -402,7 +402,7 @@ def CalcularCostoEnvioObra(obra):
     if obra["Weight (kg)"] !="":
         peso = float(obra["Weight (kg)"])
     costo_k = peso*72
-    costo = 43
+    costo = 48
     #Cuando se tiene diametro
     if obra["Diameter (cm)"] != "0" and obra["Diameter (cm)"] != "":
         diametro = float(obra["Diameter (cm)"])
