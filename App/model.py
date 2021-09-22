@@ -28,6 +28,7 @@ import datetime
 import time
 import config as cf
 import operator
+import math
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import insertionsort as inser
 from DISClib.Algorithms.Sorting import mergesort as ms
@@ -372,6 +373,7 @@ def ListaPorDepto(catalog, depto):
             a = "NO"
         else: 
             a = x["Length (cm)"]
+
         if x["Width (cm)"] == "":
             b = "NO"
         else: 
@@ -379,5 +381,23 @@ def ListaPorDepto(catalog, depto):
         print("Profundidad: " +respuesta + "---Diametro: "+ y + "---Height: " + z+ "---Length: "+a+"---Width (cm): "+b)
 
     return obra, lt.size(sublist)
+
+def CalcularCostoEnvioObra(obra):
+    if obra["Diameter (cm)"] != "0" and obra["Diameter (cm)"] != "":
+        diametro = float(obra["Diameter (cm)"])
+        if obra["Height (cm)"] != "0" and obra["Height (cm)"] != "": 
+            altura = float(obra["Height (cm)"])
+            volumen = (2*math.pi*((diametro/2)**2))*(altura)
+            costo = (9/125000)*volumen
+            #(72usd/m^3 es equivalente a (9/125000)/cm^3)
+        else:
+            area = (2*math.pi*((diametro/2)**2))
+            costo = (9/1250)*area
+            #(72usd/m^2 es equivalente a (9/1250)/cm^2)
+    else:
+        if obra["Depth (cm)"] != "0" and obra["Depth (cm)"] != "":
+            profunidad = float(obra["Depth (cm)"])
+            
+
 
 
