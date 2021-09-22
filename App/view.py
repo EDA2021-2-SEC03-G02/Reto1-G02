@@ -166,6 +166,7 @@ while True:
         peso_total = resultado[1]
         print("El costo total aproximado para el envío del departamento es de: " +str(costo_total)+ " USD.")
         print("EL peso total del departamento es de: " +str(peso_total)+ " Kg.")
+        top3Antiguas = controller.ObrasMasAntiguas(lista)
     else:
         sys.exit(0)
 sys.exit(0)

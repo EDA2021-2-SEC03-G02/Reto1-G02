@@ -159,6 +159,19 @@ def compareArtistsYearBorn(artist1, artist2):
         return 1
     else:
         return 0
+def compareDate(artwork1, artwork2):
+    if artwork1["Date"] == "":
+        a = 0
+    else:
+        a = int(artwork1["Date"])
+    if artwork2["Date"] == "":
+        b = 0
+    else: 
+        b = int(artwork2["Date"])
+    if a < b:
+        return 1
+    else:
+        return 0
     """a = int(artist1["BeginDate"])
     b = int(artist2["BeginDate"])
     if a > b:
@@ -465,6 +478,17 @@ def CostoTodasObras(lista):
        obra["costo"] = costo
     lista_costo = lista.copy()
     return costo_total, peso_total, lista_costo
+
+def ObrasMasAntiguas(lista):
+    SinVacio = lt.newList(cmpfunction=compareartworks)
+    lista_ord = ms.sort(lista, compareDate)
+    for obra in lt.iterator(lista_ord):
+        if obra["Date"] != "":
+            lt.addLast(SinVacio, obra)
+    top_3_antiguas = lt.subList(SinVacio, 1, 5)
+    print(top_3_antiguas)
+    return(top_3_antiguas)
+
 
     
 

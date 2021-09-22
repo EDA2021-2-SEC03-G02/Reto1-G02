@@ -121,3 +121,6 @@ def CalcularCostoEnvioObra(obra):
 def CostoTodasObras(lista):
     return model.CostoTodasObras(lista)
 
+def ObrasMasAntiguas(lista):
+    return model.ObrasMasAntiguas(lista)
+
