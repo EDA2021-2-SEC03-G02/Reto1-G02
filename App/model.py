@@ -146,7 +146,7 @@ def compareartworksmedium(artwork1,artwork2):
 def compareArtistsYearBorn(artist1, artist2):
     a = int(artist1["BeginDate"])
     b = int(artist2["BeginDate"])
-    if a > b:
+    if a < b:
         return 1
     else:
         return 0
@@ -320,15 +320,14 @@ def ClasificaconPorNacionalidades(catalog):
 def sublistaRangoArtistas(catalog, year1, year2):
     artistas = catalog["artists"]
     artistas = ms.sort(artistas, compareArtistsYearBorn)
-    for x in lt.iterator(artistas):
-        if x["BeginDate"] != "0":
-            print(x["BeginDate"])
     sublist = lt.newList(cmpfunction=compareartist)
     for artist in lt.iterator(artistas):
         year = int(artist["BeginDate"])
         if year !=0:   
             if year >= year1 and year <= year2:
                 lt.addLast(sublist, artist)
+    for x in lt.iterator(sublist):
+        print(x["BeginDate"])
     return sublist, lt.size(sublist)
 
 
