@@ -397,7 +397,7 @@ def CalcularCostoEnvioObra(obra):
     else:
         if obra["Depth (cm)"] != "0" and obra["Depth (cm)"] != "":
             profunidad = float(obra["Depth (cm)"])
-            
+
 
 
 
