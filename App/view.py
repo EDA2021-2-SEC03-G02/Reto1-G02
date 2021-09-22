@@ -157,8 +157,11 @@ while True:
         controller.ClasificaconPorNacionalidades(catalog)
     elif int(inputs[0]) == 6:
         departamento = input("Seleccione el Departamento del cual desea saber su costo total de envío")
-        lista = controller.ListaPorDepto(catalog, departamento)
-        
+        ListaPorDepto = controller.ListaPorDepto(catalog, departamento)
+        lista = ListaPorDepto[0]
+        tamañoDepto = ListaPorDepto[1]
+        print("El total de obras a transportar es de: " + str(tamañoDepto))
+
     else:
         sys.exit(0)
 sys.exit(0)

@@ -113,5 +113,5 @@ def ClasificaconPorNacionalidades(catalog):
 
 #Funciones Req 5
 def ListaPorDepto(catalog, depto):
-    return model.ListaPorDepto
+    return model.ListaPorDepto(catalog, depto)
 

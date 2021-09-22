@@ -144,7 +144,7 @@ def compareartworksmedium(artwork1,artwork2):
         return -1
         
 def compareartworkdepartment(artwork1,artwork2):
-    if artwork1['Department'] > artwork2['Departmen']:
+    if artwork1['Department'] > artwork2['Department']:
         return 1
     elif artwork1['Department'] == artwork2['Department']:
         return 0
@@ -351,10 +351,33 @@ def ArtistasNacimientoUltimos3(lista):
 def ListaPorDepto(catalog, depto):
     obras = catalog["artworks"]
     obras_ordenadas = ms.sort(obras, compareartworkdepartment)
-    sublist = lt.newList(cmpfunciont=compareartworks)
-    for obra in obras_ordenadas:
+    sublist = lt.newList(cmpfunction=compareartworks)
+    for obra in lt.iterator(obras_ordenadas):
         if obra["Department"] == depto:
             lt.addLast(sublist, obra)
-    return obra
+    for x in lt.iterator(obras_ordenadas):
+        if x["Depth (cm)"] == "":
+            respuesta = "NO"
+        else:
+            respuesta = x["Depth (cm)"]
+        if x["Diameter (cm)"] == "":
+            y = "NO"
+        else: 
+            y = x["Diameter (cm)"]
+        if x["Height (cm)"] == "":
+            z = "NO"
+        else: 
+            z = x["Height (cm)"]
+        if x["Length (cm)"] == "":
+            a = "NO"
+        else: 
+            a = x["Length (cm)"]
+        if x["Width (cm)"] == "":
+            b = "NO"
+        else: 
+            b = x["Width (cm)"]
+        print("Profundidad: " +respuesta + "---Diametro: "+ y + "---Height: " + z+ "---Length: "+a+"---Width (cm): "+b)
+
+    return obra, lt.size(sublist)
 
 
