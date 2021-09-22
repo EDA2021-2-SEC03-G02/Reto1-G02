@@ -499,7 +499,6 @@ def ObrasMasAntiguas(lista):
 def ObrasMasCaras(lista):
     lista_ord = ms.sort(lista, compareCosto)
     top_5_caras = lt.subList(lista_ord, 1, 5)
-    print(top_5_caras)
     return top_5_caras
 
 def ArtistaEnObra(catalog, obra):
@@ -512,7 +511,7 @@ def ArtistaEnObra(catalog, obra):
     for id in lista_nueva:
         for artista in lt.iterator(artistas):
             if artista["ConstituentID"] == str(id):
-                nombre = artista["ConstituentID"]
+                nombre = artista["DisplayName"]
                 nombres += "(" + nombre +")"
     print(nombres)
     return nombres
