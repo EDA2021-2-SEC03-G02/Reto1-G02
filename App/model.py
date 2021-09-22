@@ -356,7 +356,8 @@ def ListaPorDepto(catalog, depto):
     for obra in lt.iterator(obras_ordenadas):
         if obra["Department"] == depto:
             lt.addLast(sublist, obra)
-    for x in lt.iterator(obras_ordenadas):
+    #La siguiente parte fue usada para analizar los casos posibles al momento de calcular volumenes y areas. Ignorar :).
+    """for x in lt.iterator(obras_ordenadas):
         if x["Depth (cm)"] == "":
             respuesta = "NO"
         else:
@@ -378,9 +379,9 @@ def ListaPorDepto(catalog, depto):
             b = "NO"
         else: 
             b = x["Width (cm)"]
-        print("Profundidad: " +respuesta + "---Diametro: "+ y + "---Height: " + z+ "---Length: "+a+"---Width (cm): "+b)
+        print("Profundidad: " +respuesta + "---Diametro: "+ y + "---Height: " + z+ "---Length: "+a+"---Width (cm): "+b)"""
 
-    return obra, lt.size(sublist)
+    return sublist, lt.size(sublist)
 
 def CalcularCostoEnvioObra(obra):
     final = 0
@@ -407,9 +408,12 @@ def CalcularCostoEnvioObra(obra):
         #Hay Profundidad, volumen
         if obra["Depth (cm)"] != "0" and obra["Depth (cm)"] != "":
             profundidad = float(obra["Depth (cm)"])
-            height = float(obra["Height (cm)"])
-            length = float(obra["Length (cm)"])
-            width = float(obra["Width (cm)"])
+            if obra["Height (cm)"] != "0" and obra["Height (cm)"] != "":
+                height = float(obra["Height (cm)"])
+            if obra["Length (cm)"] != "0" and obra["Length (cm)"] != "":
+                length = float(obra["Length (cm)"])
+            if obra["Width (cm)"] != "0" and obra["Width (cm)"] != "":
+                width = float(obra["Width (cm)"])
             #Caso 1: Se se tiene height y length, pero no width
             if (obra["Height (cm)"] != "0" and obra["Height (cm)"] != "") and (obra["Length (cm)"] != "0" and obra["Length (cm)"] != "") and (obra["Width (cm)"] == "0" or obra["Width (cm)"] == ""):
                 volumen = profundidad*height*length
@@ -419,14 +423,17 @@ def CalcularCostoEnvioObra(obra):
                 volumen = profundidad*height*width
                 costo = (9/125000)*volumen
             #Caso 3: Si se tiene length y width, pero no height
-            else:
+            elif (obra["Height (cm)"] == "0" or obra["Height (cm)"] == "") and (obra["Length (cm)"] != "0" and obra["Length (cm)"] != "") and (obra["Width (cm)"] != "0" and obra["Width (cm)"] != ""):
                 volumen = profundidad*length*width
                 costo = (9/125000)*volumen
         #No hay profundidad, solo área
         else:
-            height = float(obra["Height (cm)"])
-            length = float(obra["Length (cm)"])
-            width = float(obra["Width (cm)"])
+            if obra["Height (cm)"] != "0" and obra["Height (cm)"] != "":
+                height = float(obra["Height (cm)"])
+            if obra["Length (cm)"] != "0" and obra["Length (cm)"] != "":
+                length = float(obra["Length (cm)"])
+            if obra["Width (cm)"] != "0" and obra["Width (cm)"] != "":
+                width = float(obra["Width (cm)"])
             #Caso 1: Se se tiene height y length, pero no width
             if (obra["Height (cm)"] != "0" and obra["Height (cm)"] != "") and (obra["Length (cm)"] != "0" and obra["Length (cm)"] != "") and (obra["Width (cm)"] == "0" or obra["Width (cm)"] == ""):
                 area = height*length
@@ -436,15 +443,29 @@ def CalcularCostoEnvioObra(obra):
                 area = height*width
                 costo = (9/1250)*area
             #Caso 3: Si se tiene length y width, pero no height
-            else:
+            elif (obra["Height (cm)"] == "0" or obra["Height (cm)"] == "") and (obra["Length (cm)"] != "0" and obra["Length (cm)"] != "") and (obra["Width (cm)"] != "0" and obra["Width (cm)"] != ""):
                 area = length*width
                 costo = (9/1250)*area
     if costo > costo_k:
         final = costo
     else:
         final = costo_k
-    return final
+    return final, peso
     
+def CostoTodasObras(lista):
+    costo = 0
+    costo_total = 0
+    peso_total = 0
+    for obra in lt.iterator(lista):
+       resultado = CalcularCostoEnvioObra(obra)
+       costo = resultado[0]
+       peso = resultado[1]
+       peso_total += peso
+       costo_total += costo
+       obra["costo"] = costo
+    lista_costo = lista.copy()
+    return costo_total, peso_total, lista_costo
+
     
 
 

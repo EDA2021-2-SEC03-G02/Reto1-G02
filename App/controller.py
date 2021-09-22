@@ -115,3 +115,9 @@ def ClasificaconPorNacionalidades(catalog):
 def ListaPorDepto(catalog, depto):
     return model.ListaPorDepto(catalog, depto)
 
+def CalcularCostoEnvioObra(obra):
+    return model.CalcularCostoEnvioObra(obra)
+
+def CostoTodasObras(lista):
+    return model.CostoTodasObras(lista)
+

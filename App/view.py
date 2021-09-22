@@ -161,7 +161,11 @@ while True:
         lista = ListaPorDepto[0]
         tamañoDepto = ListaPorDepto[1]
         print("El total de obras a transportar es de: " + str(tamañoDepto))
-
+        resultado = controller.CostoTodasObras(lista)
+        costo_total = resultado[0]
+        peso_total = resultado[1]
+        print("El costo total aproximado para el envío del departamento es de: " +str(costo_total)+ " USD.")
+        print("EL peso total del departamento es de: " +str(peso_total)+ " Kg.")
     else:
         sys.exit(0)
 sys.exit(0)
