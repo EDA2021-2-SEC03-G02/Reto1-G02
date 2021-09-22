@@ -156,7 +156,6 @@ while True:
     elif int(inputs[0]) == 5:
         controller.ClasificaconPorNacionalidades(catalog)
     elif int(inputs[0]) == 6:
-        print(math.pi)
         departamento = input("Seleccione el Departamento del cual desea saber su costo total de envío")
         ListaPorDepto = controller.ListaPorDepto(catalog, departamento)
         lista = ListaPorDepto[0]
@@ -167,7 +166,8 @@ while True:
         peso_total = resultado[1]
         print("El costo total aproximado para el envío del departamento es de: " +str(costo_total)+ " USD.")
         print("EL peso total del departamento es de: " +str(peso_total)+ " Kg.")
-        top3Antiguas = controller.ObrasMasAntiguas(lista)
+        top5Antiguas = controller.ObrasMasAntiguas(lista)
+        top5Caras = controller.ObrasMasCaras(resultado[2])
     else:
         sys.exit(0)
 sys.exit(0)

@@ -124,3 +124,5 @@ def CostoTodasObras(lista):
 def ObrasMasAntiguas(lista):
     return model.ObrasMasAntiguas(lista)
 
+def ObrasMasCaras(lista):
+    return model.ObrasMasCaras(lista)
