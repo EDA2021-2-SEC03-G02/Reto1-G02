@@ -513,7 +513,6 @@ def ArtistaEnObra(catalog, obra):
             if artista["ConstituentID"] == str(id):
                 nombre = artista["DisplayName"]
                 nombres += "(" + nombre +")"
-    print(nombres)
     return nombres
 
 
