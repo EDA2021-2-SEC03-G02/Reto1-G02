@@ -20,7 +20,7 @@
  * along withthis program.  If not, see <http://www.gnu.org/licenses/>.
  """
 
-
+import math
 import config as cf
 import sys
 import controller
@@ -156,6 +156,7 @@ while True:
     elif int(inputs[0]) == 5:
         controller.ClasificaconPorNacionalidades(catalog)
     elif int(inputs[0]) == 6:
+        print(math.pi)
         departamento = input("Seleccione el Departamento del cual desea saber su costo total de envío")
         ListaPorDepto = controller.ListaPorDepto(catalog, departamento)
         lista = ListaPorDepto[0]
