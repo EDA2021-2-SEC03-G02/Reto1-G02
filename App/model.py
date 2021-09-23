@@ -59,11 +59,19 @@ def newCatalog():
     elif TipoDeLista == 'al':
         catalog['artists'] = lt.newList('ARRAY_LIST', cmpfunction=compareartist)
         catalog['artworks'] = lt.newList('ARRAY_LIST', cmpfunction=compareartworks)
-    elif catalog['nacionalidades']:
-        pass   
+       
     else:
         return 'Error'
+    catalog['nacionalidades']=lt.newList('ARRAY_LIST')
     return catalog
+
+def NacionalidadNueva(nacionalidad):
+    pais={'Pais':'',
+          'Obra':None ,
+          'Número de obras':0}
+    pais['Pais']=nacionalidad
+    pais['obras']=lt.newList('Array_List')
+    return pais
 
 def addArtwork(catalog, artwork):
     # Se adiciona el libro a la lista de libros
@@ -84,6 +92,41 @@ def lastThreeArtworks(catalog):
     return sublista
 
 # Funciones para agregar informacion al catalogo
+def AddNacionalidadesObras(catalog, artwork):
+    ArtistasDeObras= artwork['ConstituentID']
+    ListaIDs=ArtistasDeObras.strip('[]').split(', ')
+    ListaArtistas= lt.newList('ARRAY_LIST')
+    for artista in lt.iterator(catalog['artists']):
+        if artista['ConstituentID'] in ListaIDs:
+          lt.addLast(ListaArtistas,artista)  
+    for artista in lt.iterator(ListaArtistas):
+        AddNuevaNacionalidad(catalog,artwork,artista)
+    
+
+
+
+def AddNuevaNacionalidad(catalog, artist, artwork ):
+    nacionalidad=artist['nacionalidad']
+    nacionalidades= catalog['nacionalidades']
+    if nacionalidad=='':
+        nacionalidad='N/A'
+    existe=False
+    for pais in lt.iterator(nacionalidades):
+        nombre=pais['pais']
+        if nombre == nacionalidad:
+            lt.addLast(pais['obra'],artwork)
+            pais['Número de obras']+=1
+            existe=True
+    if existe==False:
+        nuevopais= NacionalidadNueva(nacionalidad)
+        nuevaobra= nuevopais['obra']
+        lt.addLast(nuevaobra,artwork)
+        nuevopais['Numero de obras']+=1
+        existe=True
+        lt.addLast(nacionalidades,nuevopais)
+
+
+
 
 # Funciones para creacion de datos
 
@@ -513,15 +556,3 @@ def ArtistaEnObra(catalog, obra):
                 nombre = artista["DisplayName"]
                 nombres += "(" + nombre +")"
     return nombres
-
-
-
-    
-
-
-        
-
-
-
-
-
