@@ -367,7 +367,7 @@ def ArtistasNacimientoUltimos3(lista):
     return sublista
 
 
-#Funciones para requerimiento 1
+#Funciones para requerimiento 5
 
 def ListaPorDepto(catalog, depto):
     obras = catalog["artworks"]
