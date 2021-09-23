@@ -111,4 +111,21 @@ def lista_tecnicas_mas_usadas(lista, tecnica):
 def ClasificaconPorNacionalidades(catalog):
     return model.ClasificaconPorNacionalidades(catalog)
 
+#Funciones Req 5
+def ListaPorDepto(catalog, depto):
+    return model.ListaPorDepto(catalog, depto)
 
+def CalcularCostoEnvioObra(obra):
+    return model.CalcularCostoEnvioObra(obra)
+
+def CostoTodasObras(lista):
+    return model.CostoTodasObras(lista)
+
+def ObrasMasAntiguas(lista):
+    return model.ObrasMasAntiguas(lista)
+
+def ObrasMasCaras(lista):
+    return model.ObrasMasCaras(lista)
+
+def ArtistaEnObra(catalog, obra):
+    return model.ArtistaEnObra(catalog, obra)

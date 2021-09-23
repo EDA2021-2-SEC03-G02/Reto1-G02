@@ -20,7 +20,7 @@
  * along withthis program.  If not, see <http://www.gnu.org/licenses/>.
  """
 
-
+import math
 import config as cf
 import sys
 import controller
@@ -45,6 +45,7 @@ def printMenu():
     print("3- Listar cronológicamente las adquisiciones")
     print("4- Clasificar las obras de un artista por técnica")
     print("5- Clasificar las obras por la nacionalidad de sus creadores")
+    print("6- Calcular costo de envío de un Departamento del museo")
 
 def initCatalog():
     """
@@ -100,7 +101,13 @@ def printArtistasNacimiento(lista):
             respuesta = "El artista sigue vivo"
         else:
             respuesta = artista["EndDate"]
-        print("Nombre del artista: " + artista["DisplayName"] + " --- Fecha de nacimiento: " +artista["BeginDate"] + " --- Año de fallecimiento: " +respuesta+ " --- Nacionalidad: " +artista["Nationality"]+ " --- Género (Male para masculino y Female para femenino): " + artista["Gender"])
+        print("Nombre del artista: " + artista["DisplayName"] + " --- Fecha de nacimiento: " +artista["BeginDate"] + " --- Año de fallecimiento: " +respuesta+ " --- Nacionalidad: " +artista["Nationality"]+ " --- Género (Male para masculino y Female para femenino, vacío si no se conoce o no aplica): " + artista["Gender"] + ".")
+    pass
+
+def printObrasConCostos(lista, catalog):
+    for obra in lt.iterator(lista):
+        artista = controller.ArtistaEnObra(catalog, obra)
+        print("Nombre de la obra: " + obra["Title"] + " --- El/La/Los artistas que crearon la obra son: "+ artista+ " --- La clasifiación de la obra es: "+obra["Classification"]+ " --- Fecha de creación: " + obra["Date"] + " --- Medio/Técnica: " + obra["Medium"] + " --- Dimensiones: " + obra["Dimensions"]+" --- Costo: "+str(obra["costo"]))
     pass
 
 catalog = None
@@ -167,6 +174,26 @@ while True:
         printObrasXMedioArtista(lista_mega_final)
     elif int(inputs[0]) == 5:
         controller.ClasificaconPorNacionalidades(catalog)
+    elif int(inputs[0]) == 6:
+        departamento = input("Seleccione el Departamento del cual desea saber su costo total de envío")
+        ListaPorDepto = controller.ListaPorDepto(catalog, departamento)
+        lista = ListaPorDepto[0]
+        tamañoDepto = ListaPorDepto[1]
+        print("El total de obras a transportar es de: " + str(tamañoDepto))
+        resultado = controller.CostoTodasObras(lista)
+        costo_total = resultado[0]
+        peso_total = resultado[1]
+        print("El costo total aproximado para el envío del departamento es de: " +str(costo_total)+ " USD.")
+        print("EL peso total del departamento es de: " +str(peso_total)+ " Kg.")
+        top5Antiguas = controller.ObrasMasAntiguas(lista)
+        top5Caras = controller.ObrasMasCaras(resultado[2])
+        print("Las 5 obras más costosas del Departamento son: ")
+        printObrasConCostos(top5Caras, catalog)
+        print("-----------------------------------------------")
+        print("Las 5 obras más antiguas son: ")
+        printObrasConCostos(top5Antiguas, catalog)
+        
+
     else:
         sys.exit(0)
 sys.exit(0)
