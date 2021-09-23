@@ -59,6 +59,8 @@ def newCatalog():
     elif TipoDeLista == 'al':
         catalog['artists'] = lt.newList('ARRAY_LIST', cmpfunction=compareartist)
         catalog['artworks'] = lt.newList('ARRAY_LIST', cmpfunction=compareartworks)
+    elif catalog['nacionalidades']:
+        pass   
     else:
         return 'Error'
     return catalog
@@ -210,28 +212,24 @@ def sortArtworksDateAcquired(catalog, anio1, anio2, mes1, mes2, dia1, dia2):
         dateArt3=datetime.datetime(year,month,day)
         if (dateArt3>= dateArt1) and (dateArt3<= dateArt2):
             lt.addLast(sublist, artwork)
-            print('aaaa')
                      
     sub_list = sublist.copy()
     start_time = time.process_time()
     sorted_list = ms.sort(sub_list, cmpArtworkByDateAcquired)
     stop_time = time.process_time()
-    print(str(sorted_list))
 
     purchaseList = lt.newList(cmpfunction=compareartworks)
     for artwork in lt.iterator(sorted_list):
         if "Purchase" in artwork["CreditLine"]:
             lt.addLast(purchaseList, artwork)
     listFirst3 = sorted_list.copy()
-    print(listFirst3)
     if len(listFirst3)>2:
         first3= lt.subList(listFirst3,0,3)
         last3 = lt.subList(listFirst3, len(listFirst3)-3, 3)
     else:
         first3= lt.subList(listFirst3)
-        last3 = lt.subList(listFirst3)  
-                    
-                       
+        last3 = lt.subList(listFirst3)                  
+                      
     numPurchase = len(purchaseList)
     num = len(sorted_list)
     elapsed_time_mseg = (stop_time - start_time)*1000
@@ -321,7 +319,8 @@ def ClasificaconPorNacionalidades(catalog):
     for artwork in lt.iterator(obras):
         lt.addLast(idArtistas, artwork['ConstituentID'])         
     print(idArtistas)
-    diccPaises={}
+    diccPaises={}    
+    artist=[]
     i=0
     for artista in lt.iterator(artistas):
         while i < len(idArtistas):
@@ -332,7 +331,7 @@ def ClasificaconPorNacionalidades(catalog):
                    diccPaises[artista["Nationality"]]+=1    
             i+=1
 
-    print(str(diccPaises))            
+    print((diccPaises))            
 
     aaaa=""
 

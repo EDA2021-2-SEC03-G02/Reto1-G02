@@ -78,6 +78,17 @@ def printSortResultsArtworks(ord_artworks, sample=700):
             i += 1
     pass
 
+def printprimeras3obrasordenadas(lista):
+    print("Las primeras 3 obras del rango son: ")
+    for obra in lt.iterator(lista):
+        print("Nombre de la obra: " + obra["Title"] + " --- Artista(s): " + obra["ConstituentID"] + " --- Fecha: " + obra["Date"] + " --- Medio: " + obra["Medium"]+ " --- Dimensiones: " + obra["Dimensions"])
+    pass
+def printultimas3obrasordenadas(lista):
+    print("Las últimas 3 obras del rango son: ")
+    for obra in lt.iterator(lista):
+        print("Nombre de la obra: " + obra["Title"] + " --- Artista(s): " + obra["ConstituentID"] + " --- Fecha: " + obra["Date"] + " --- Medio: " + obra["Medium"]+ " --- Dimensiones: " + obra["Dimensions"])
+    pass
+
 def printObrasXMedioArtista(lista):
     print("Las obras creadas con la téncia más popular del artista son: ")
     for obra in lt.iterator(lista):
@@ -147,11 +158,13 @@ while True:
         start_time = time.process_time()
 
         result = controller.sortArtworksDateAcquired(catalog, anio1, anio2, mes1, mes2, dia1, dia2) 
+        primeras3contr=result[3]
+        ultimas3contr=result[4]
         print("Para la muestra del total de elementos, el tiempo (mseg) es: ", str(result[0]))
         print("El número total de obras en el rango de tiempo es: ", str(result[1]))
-        print("El número total de obras compradas en el rango de tiempo es: ", str(result[2]))
-        print("Las primeras 3 obras en el rango de tiempo son: ", str(result[3]))
-        print("Las ultimas 3 obras en el rango de tiempo es: ", str(result[4]))
+        print("El número total de obras compradas en el rango de tiempo son: ", str(result[2]))
+        printprimeras3obrasordenadas(primeras3contr)
+        printultimas3obrasordenadas(ultimas3contr)
 
         stop_time = time.process_time()
         elapsed_time_mseg = (stop_time - start_time)*1000
