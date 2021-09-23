@@ -65,13 +65,6 @@ def newCatalog():
     catalog['nacionalidades']=lt.newList('ARRAY_LIST')
     return catalog
 
-def NacionalidadNueva(nacionalidad):
-    pais={'Pais':'',
-          'Obra':None ,
-          'Número de obras':0}
-    pais['Pais']=nacionalidad
-    pais['obras']=lt.newList('Array_List')
-    return pais
 
 def addArtwork(catalog, artwork):
     # Se adiciona el libro a la lista de libros
@@ -91,7 +84,15 @@ def lastThreeArtworks(catalog):
     sublista = lt.subList(artworks, (len(artworks))-3, 3)
     return sublista
 
-# Funciones para agregar informacion al catalogo
+# Funciones req4
+def NacionalidadNueva(nacionalidad):
+    pais={'Pais':'',
+          'Obra':None ,
+          'Numero de obras':0}
+    pais['Pais']=nacionalidad
+    pais['obras']=lt.newList('Array_List')
+    return pais
+
 def AddNacionalidadesObras(catalog, artwork):
     ArtistasDeObras= artwork['ConstituentID']
     ListaIDs=ArtistasDeObras.strip('[]').split(', ')
@@ -101,7 +102,7 @@ def AddNacionalidadesObras(catalog, artwork):
           lt.addLast(ListaArtistas,artista)  
     for artista in lt.iterator(ListaArtistas):
         AddNuevaNacionalidad(catalog,artwork,artista)
-    
+
 
 
 
@@ -124,6 +125,16 @@ def AddNuevaNacionalidad(catalog, artist, artwork ):
         nuevopais['Numero de obras']+=1
         existe=True
         lt.addLast(nacionalidades,nuevopais)
+
+def ordenarpaises(nacionalidades):
+    sublista=lt.subList(nacionalidades,1,lt.size(nacionalidades))
+    sublista=sublista.copy()
+    start_time = time.process_time()
+    sorted_list = ms.sort(sublista, cmpNacionalidadesPorRanking)
+    stop_time = time.process_time()
+    time_ms=(stop_time - start_time)*1000
+    Rankingtop10 = lt.subList(sorted_list, 1, 10)
+    return time_ms, Rankingtop10
 
 
 
@@ -162,7 +173,10 @@ def cmpArtworkByDateAcquired(artwork1, artwork2):
     else:
         return False 
     
+def cmpNacionalidadesPorRanking(pais1, pais2):
 
+    result = pais1['Numero de obras'] > pais2['Numero de obras']
+    return result
 
 
 def compareartist(artistname1, artist):

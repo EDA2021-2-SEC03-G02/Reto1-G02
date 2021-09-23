@@ -109,6 +109,18 @@ def printObrasConCostos(lista, catalog):
         artista = controller.ArtistaEnObra(catalog, obra)
         print("Nombre de la obra: " + obra["Title"] + " --- El/La/Los artistas que crearon la obra son: "+ artista+ " --- La clasifiación de la obra es: "+obra["Classification"]+ " --- Fecha de creación: " + obra["Date"] + " --- Medio/Técnica: " + obra["Medium"] + " --- Dimensiones: " + obra["Dimensions"]+" --- Costo: "+str(obra["costo"]))
     pass
+def printTop10paises(paises):
+    print('Las 10 procedencias de obras más comunes en el MoMa son: ')
+
+    for nacionalidad in lt.iterator(paises):
+        print("\n" + nacionalidad['Pais'] + " : " + str(nacionalidad['Numero de obras']))
+    pais = lt.getElement(paises, 1)
+    print("las primeras 3 obras del país con más obras ("+ pais['Pais'] +")en el MoMa son: ")
+    
+
+
+
+
 
 catalog = None
 a=None
@@ -186,7 +198,11 @@ while True:
         elapsed_time_mseg = (stop_time - start_time)*1000
         print("El tiempo (en mseg) que se demoró el código fue de: " +str(elapsed_time_mseg))
     elif int(inputs[0]) == 5:
-        controller.ClasificaconPorNacionalidades(catalog)
+        size = lt.size(catalog['nacionalidades'])
+
+        result = controller.ordenarpaises(catalog)
+        print("\n Para una muestra de", size, "paises, el tiempo (mseg) es: ", str(result[0]))
+        printTop10paises(result[1])
     elif int(inputs[0]) == 6:
         departamento = input("Seleccione el Departamento del cual desea saber su costo total de envío")
         start_time = time.process_time()

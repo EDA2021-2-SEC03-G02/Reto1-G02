@@ -129,3 +129,7 @@ def ObrasMasCaras(lista):
 
 def ArtistaEnObra(catalog, obra):
     return model.ArtistaEnObra(catalog, obra)
+def ordenarpaises(catalog):
+    paises=catalog['nacionalidades']
+    resultado=model.ordenarpaises(paises)
+    return resultado
