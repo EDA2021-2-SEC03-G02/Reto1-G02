@@ -367,11 +367,11 @@ def ArtistasNacimientoUltimos3(lista):
     return sublista
 
 
-#Funciones para requerimiento 1
+#Funciones para requerimiento 5
 
 def ListaPorDepto(catalog, depto):
     obras = catalog["artworks"]
-    obras_ordenadas = ms.sort(obras, compareartworkdepartment)
+    obras_ordenadas =ms.sort(obras, compareartworkdepartment)
     sublist = lt.newList(cmpfunction=compareartworks)
     for obra in lt.iterator(obras_ordenadas):
         if obra["Department"] == depto:
