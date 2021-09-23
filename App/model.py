@@ -90,37 +90,43 @@ def NacionalidadNueva(nacionalidad):
           'Obra':None ,
           'Numero de obras':0}
     pais['Pais']=nacionalidad
-    pais['obras']=lt.newList('Array_List')
+    pais['Obra']=lt.newList('ARRAY_LIST')
     return pais
 
 def AddNacionalidadesObras(catalog, artwork):
     ArtistasDeObras= artwork['ConstituentID']
+
     ListaIDs=ArtistasDeObras.strip('[]').split(', ')
-    ListaArtistas= lt.newList('ARRAY_LIST')
+    numArtistasObra=len(ListaIDs)
+    ListaArtistas= lt.newList()
+    cuenta = 0
     for artista in lt.iterator(catalog['artists']):
         if artista['ConstituentID'] in ListaIDs:
           lt.addLast(ListaArtistas,artista)  
+          cuenta+=1
+        if cuenta == numArtistasObra:
+            break
     for artista in lt.iterator(ListaArtistas):
         AddNuevaNacionalidad(catalog,artwork,artista)
 
 
 
 
-def AddNuevaNacionalidad(catalog, artist, artwork ):
-    nacionalidad=artist['nacionalidad']
+def AddNuevaNacionalidad(catalog, artist, artwork):
+    nacionalidad=artist['Nationality']
     nacionalidades= catalog['nacionalidades']
     if nacionalidad=='':
         nacionalidad='N/A'
     existe=False
     for pais in lt.iterator(nacionalidades):
-        nombre=pais['pais']
+        nombre=pais['Pais']
         if nombre == nacionalidad:
-            lt.addLast(pais['obra'],artwork)
-            pais['Número de obras']+=1
+            lt.addLast(pais['Obra'],artwork)
+            pais['Numero de obras']+=1
             existe=True
     if existe==False:
         nuevopais= NacionalidadNueva(nacionalidad)
-        nuevaobra= nuevopais['obra']
+        nuevaobra= nuevopais['Obra']
         lt.addLast(nuevaobra,artwork)
         nuevopais['Numero de obras']+=1
         existe=True
@@ -131,10 +137,27 @@ def ordenarpaises(nacionalidades):
     sublista=sublista.copy()
     start_time = time.process_time()
     sorted_list = ms.sort(sublista, cmpNacionalidadesPorRanking)
+    print(sorted_list)
     stop_time = time.process_time()
     time_ms=(stop_time - start_time)*1000
     Rankingtop10 = lt.subList(sorted_list, 1, 10)
     return time_ms, Rankingtop10
+
+def buscarArtistaPorID(catalog,IDs):
+    artistas=catalog['artists']
+    ListaIDs=IDs.strip("[]").split(", ")
+    Nombres=lt.newList()
+    for ID in ListaIDs:
+        cuenta=0
+        while cuenta == 0:
+            for artist in lt.iterator(artistas):
+                if artist["ConstituentID"] == ID:
+                    lt.addLast(Nombres,artist['DisplayName'])
+                    cuenta = 1
+
+    return Nombres
+
+
 
 
 

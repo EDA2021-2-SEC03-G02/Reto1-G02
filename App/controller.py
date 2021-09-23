@@ -133,3 +133,5 @@ def ordenarpaises(catalog):
     paises=catalog['nacionalidades']
     resultado=model.ordenarpaises(paises)
     return resultado
+def buscarArtistaPorID(catalog, IDs):
+    return model.searchArtistByID(catalog, IDs)
