@@ -27,7 +27,7 @@ import controller
 from DISClib.ADT import list as lt
 assert cf
 import sys
-
+import time
 
 """
 La vista se encarga de la interacción con el usuario
@@ -135,6 +135,7 @@ while True:
     elif int(inputs[0]) == 2:
         year1 = int(input("Por favor elija el año 1, con el que se dará inicio al rango: "))
         year2 = int(input("Por favor seleccione el año 2, con el que se dará fin al rango: "))
+        start_time = time.process_time()
         sublista = controller.sublistaRangoArtistas(catalog, year1, year2)
         print("La cantidad de artistas nacidos en este rango de años es de: " + str(sublista[1]))
         primeros3 = controller.ArtistasNacimientoPrimeros3(sublista[0])
@@ -143,6 +144,9 @@ while True:
         printArtistasNacimiento(primeros3)
         print("Los últimos 3 artistas nacidos en este rango de años son: ")
         printArtistasNacimiento(ultimos3)
+        stop_time = time.process_time()
+        elapsed_time_mseg = (stop_time - start_time)*1000
+        print("El tiempo (en mseg) que se demoró el código fue de: " +str(elapsed_time_mseg))
 
     elif int(inputs[0])== 3:
         anio1 = int(input("Indique desde que anio desea la muestra: "))
@@ -151,6 +155,7 @@ while True:
         anio2 = int(input("Indique hasta que anio desea la muestra: "))
         mes2 = int(input("Indique hasta que mes desea la muestra: "))
         dia2 = int(input("Indique hasta que dia desea la muestra: "))
+        start_time = time.process_time()
 
         result = controller.sortArtworksDateAcquired(catalog, anio1, anio2, mes1, mes2, dia1, dia2) 
         primeras3contr=result[3]
@@ -161,8 +166,13 @@ while True:
         printprimeras3obrasordenadas(primeras3contr)
         printultimas3obrasordenadas(ultimas3contr)
 
+        stop_time = time.process_time()
+        elapsed_time_mseg = (stop_time - start_time)*1000
+        print("El tiempo (en mseg) que se demoró el código fue de: " +str(elapsed_time_mseg))
+
     elif int(inputs[0]) == 4:
         nombre = input("Indique el nombre del artista del cual desea conocer cuál fue su técnica más usada: ")
+        start_time = time.process_time()
         total_obras = controller.total_obras(catalog, nombre)
         print("El artista " + str(nombre) + " produjo un total de " +str(total_obras) + " obras")
         lista_obras_artista = controller.lista_total_tecnicas(catalog, nombre)
@@ -172,10 +182,14 @@ while True:
         print("El total de medios utilizados por el artista fue de: " + str(mas_frecuente[1]))
         print("La técnica más utlizada por el artista fue: "+str(mas_frecuente[0]))
         printObrasXMedioArtista(lista_mega_final)
+        stop_time = time.process_time()
+        elapsed_time_mseg = (stop_time - start_time)*1000
+        print("El tiempo (en mseg) que se demoró el código fue de: " +str(elapsed_time_mseg))
     elif int(inputs[0]) == 5:
         controller.ClasificaconPorNacionalidades(catalog)
     elif int(inputs[0]) == 6:
         departamento = input("Seleccione el Departamento del cual desea saber su costo total de envío")
+        start_time = time.process_time()
         ListaPorDepto = controller.ListaPorDepto(catalog, departamento)
         lista = ListaPorDepto[0]
         tamañoDepto = ListaPorDepto[1]
@@ -192,6 +206,9 @@ while True:
         print("-----------------------------------------------")
         print("Las 5 obras más antiguas son: ")
         printObrasConCostos(top5Antiguas, catalog)
+        stop_time = time.process_time()
+        elapsed_time_mseg = (stop_time - start_time)*1000
+        print("El tiempo (en mseg) que se demoró el código fue de: " +str(elapsed_time_mseg))
         
 
     else:
