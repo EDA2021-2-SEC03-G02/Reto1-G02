@@ -130,10 +130,9 @@ def ArtistaEnObra(catalog, obra):
 
 
 
-    
+
 def ordenarpaises(catalog):
     paises=catalog['nacionalidades']
     resultado=model.ordenarpaises(paises)
     return resultado
-def ArtistaPorID(catalog, IDs):
-    return model.ArtistaPorID(catalog, IDs)
+

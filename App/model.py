@@ -380,19 +380,6 @@ def ordenarpaises(nacionalidades):
     Rankingtop10 = lt.subList(sorted_list, 1, 10)
     return time_ms, Rankingtop10
 
-def ArtistaPorID(catalog,IDs):
-    artistas=catalog['artists']
-    ListaIDs=IDs.strip("[]").split(", ")
-    Nombres=lt.newList()
-    for ID in ListaIDs:
-        cuenta=0
-        while cuenta == 0:
-            for artist in lt.iterator(artistas):
-                if artist["ConstituentID"] == ID:
-                    lt.addLast(Nombres,artist['DisplayName'])
-                    cuenta = 1
-
-    return Nombres
 
 
 
