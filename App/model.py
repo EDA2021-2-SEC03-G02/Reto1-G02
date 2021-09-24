@@ -50,7 +50,8 @@ def newCatalog():
     generos y libros. Retorna el catalogo inicializado.
     """
     catalog = {'artists': None,
-               'artworks': None}
+               'artworks': None,
+               'nacionalidades': None}
 
     TipoDeLista= input('¿Cómo desea guardar el catálogo del museo?(ll = Linked_list, al = Array_List))  ')
     if TipoDeLista == 'll':
@@ -59,9 +60,6 @@ def newCatalog():
     elif TipoDeLista == 'al':
         catalog['artists'] = lt.newList('ARRAY_LIST', cmpfunction=compareartist)
         catalog['artworks'] = lt.newList('ARRAY_LIST', cmpfunction=compareartworks)
-       
-    else:
-        return 'Error'
     catalog['nacionalidades']=lt.newList('ARRAY_LIST')
     return catalog
 
@@ -69,9 +67,12 @@ def newCatalog():
 def addArtwork(catalog, artwork):
     # Se adiciona el libro a la lista de libros
     lt.addLast(catalog['artworks'], artwork)
+    AddNacionalidadesObras(catalog, artwork)  
 
 def addArtist(catalog, artist):
     lt.addLast(catalog['artists'], artist)
+
+
 
 def getLast3Artists(catalog):
     artists = catalog['artists']
@@ -88,7 +89,7 @@ def lastThreeArtworks(catalog):
 def NacionalidadNueva(nacionalidad):
     pais={'Pais':'',
           'Obra':None ,
-          'Numero de obras':0}
+          'NumeroDeObras':0}
     pais['Pais']=nacionalidad
     pais['Obra']=lt.newList('ARRAY_LIST')
     return pais
@@ -96,11 +97,12 @@ def NacionalidadNueva(nacionalidad):
 def AddNacionalidadesObras(catalog, artwork):
     ArtistasDeObras= artwork['ConstituentID']
 
-    ListaIDs=ArtistasDeObras.strip('[]').split(', ')
+    ListaIDs=ArtistasDeObras.strip("[]").split(", ")
     numArtistasObra=len(ListaIDs)
-    ListaArtistas= lt.newList()
+    ListaArtistas= lt.newList('ARRAY_LIST')
     cuenta = 0
-    for artista in lt.iterator(catalog['artists']):
+    artistas=catalog['artists']
+    for artista in lt.iterator(artistas):
         if artista['ConstituentID'] in ListaIDs:
           lt.addLast(ListaArtistas,artista)  
           cuenta+=1
@@ -112,23 +114,23 @@ def AddNacionalidadesObras(catalog, artwork):
 
 
 
-def AddNuevaNacionalidad(catalog, artist, artwork):
-    nacionalidad=artist['Nationality']
+def AddNuevaNacionalidad(catalog, artwork, artist):
+    nacionalidad = artist['Nationality']
+    if nacionalidad=="" or nacionalidad=="Nationality unknown":
+        nacionalidad="N/A"
     nacionalidades= catalog['nacionalidades']
-    if nacionalidad=='':
-        nacionalidad='N/A'
     existe=False
     for pais in lt.iterator(nacionalidades):
         nombre=pais['Pais']
         if nombre == nacionalidad:
             lt.addLast(pais['Obra'],artwork)
-            pais['Numero de obras']+=1
+            pais['NumeroDeObras']+=1
             existe=True
     if existe==False:
         nuevopais= NacionalidadNueva(nacionalidad)
         nuevaobra= nuevopais['Obra']
         lt.addLast(nuevaobra,artwork)
-        nuevopais['Numero de obras']+=1
+        nuevopais['NumeroDeObras']+=1
         existe=True
         lt.addLast(nacionalidades,nuevopais)
 
@@ -137,13 +139,12 @@ def ordenarpaises(nacionalidades):
     sublista=sublista.copy()
     start_time = time.process_time()
     sorted_list = ms.sort(sublista, cmpNacionalidadesPorRanking)
-    print(sorted_list)
     stop_time = time.process_time()
     time_ms=(stop_time - start_time)*1000
     Rankingtop10 = lt.subList(sorted_list, 1, 10)
     return time_ms, Rankingtop10
 
-def buscarArtistaPorID(catalog,IDs):
+def ArtistaPorID(catalog,IDs):
     artistas=catalog['artists']
     ListaIDs=IDs.strip("[]").split(", ")
     Nombres=lt.newList()
@@ -198,7 +199,7 @@ def cmpArtworkByDateAcquired(artwork1, artwork2):
     
 def cmpNacionalidadesPorRanking(pais1, pais2):
 
-    result = pais1['Numero de obras'] > pais2['Numero de obras']
+    result = pais1['NumeroDeObras'] > pais2['NumeroDeObras']
     return result
 
 
@@ -391,31 +392,7 @@ def lista_tecnicas_mas_usadas(lista, tecnica):
 #LISTOOOOOO
 
 #Req 4
-def ClasificaconPorNacionalidades(catalog):
 
-    obras =catalog["artworks"]
-    artistas = catalog["artists"]
-    idArtistas = lt.newList(cmpfunction=compareartworks)
-    for artwork in lt.iterator(obras):
-        lt.addLast(idArtistas, artwork['ConstituentID'])         
-    print(idArtistas)
-    diccPaises={}    
-    artist=[]
-    i=0
-    for artista in lt.iterator(artistas):
-        while i < len(idArtistas):
-            if artista['ConstituentID'] in idArtistas[i]:
-                if artista["Nationality"] not in diccPaises:
-                   diccPaises[artista["Nationality"]]=1
-                else:
-                   diccPaises[artista["Nationality"]]+=1    
-            i+=1
-
-    print((diccPaises))            
-
-    aaaa=""
-
-    return aaaa
 
 
 

@@ -113,10 +113,18 @@ def printTop10paises(paises):
     print('Las 10 procedencias de obras más comunes en el MoMa son: ')
 
     for nacionalidad in lt.iterator(paises):
-        print("\n" + nacionalidad['Pais'] + " : " + str(nacionalidad['Numero de obras']))
+        print("\n" + nacionalidad['Pais'] + " | " + str(nacionalidad['NumeroDeObras']))
+        print("\n---------------")
     pais = lt.getElement(paises, 1)
-    print("las primeras 3 obras del país con más obras ("+ pais['Pais'] +")en el MoMa son: ")
-    
+    print("las primera obra del país con más obras ("+ pais['Pais'] +") en el MoMa son: ")
+    obra=lt.getElement(pais['Obra'],1)
+    titulo=obra['Title']
+    artista=obra['ConstituentID']
+    fecha=obra['Date']
+    medio=obra['Medium']
+    dimensiones=obra['Dimensions']
+    print('Título: '+ str(titulo) + '\n' + 'Código único del artista: '+ str(artista) +'\n' + 'Fecha: '+ str(fecha) +'\n' + 'Medio: '+ str(medio) + '\n' + 'Dimensiones: '+ str(dimensiones))
+    pass
 
 
 
@@ -198,10 +206,9 @@ while True:
         elapsed_time_mseg = (stop_time - start_time)*1000
         print("El tiempo (en mseg) que se demoró el código fue de: " +str(elapsed_time_mseg))
     elif int(inputs[0]) == 5:
-        size = lt.size(catalog['nacionalidades'])
 
         result = controller.ordenarpaises(catalog)
-        print("\n Para una muestra de", size, "paises, el tiempo (mseg) es: ", str(result[0]))
+        print("El tiempo (en mseg) que se demoró el código fue de: ", str(result[0]))
         printTop10paises(result[1])
     elif int(inputs[0]) == 6:
         departamento = input("Seleccione el Departamento del cual desea saber su costo total de envío")

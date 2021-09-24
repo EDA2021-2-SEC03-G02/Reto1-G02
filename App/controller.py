@@ -108,8 +108,6 @@ def tecnica_mas_utilizada(lista):
 def lista_tecnicas_mas_usadas(lista, tecnica):
     return model.lista_tecnicas_mas_usadas(lista, tecnica)
 
-def ClasificaconPorNacionalidades(catalog):
-    return model.ClasificaconPorNacionalidades(catalog)
 
 #Funciones Req 5
 def ListaPorDepto(catalog, depto):
@@ -129,9 +127,13 @@ def ObrasMasCaras(lista):
 
 def ArtistaEnObra(catalog, obra):
     return model.ArtistaEnObra(catalog, obra)
+
+
+
+    
 def ordenarpaises(catalog):
     paises=catalog['nacionalidades']
     resultado=model.ordenarpaises(paises)
     return resultado
-def buscarArtistaPorID(catalog, IDs):
-    return model.searchArtistByID(catalog, IDs)
+def ArtistaPorID(catalog, IDs):
+    return model.ArtistaPorID(catalog, IDs)
